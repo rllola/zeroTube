@@ -1,0 +1,41 @@
+{
+ "address": "1FUQPLXHimgCvYHH7v3bJXspJ7bMBUXcEb",
+ "description": "Decentralized video plateform",
+ "files": {
+  "css/all.css": {
+   "sha512": "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce",
+   "size": 0
+  },
+  "data/data.json": {
+   "sha512": "7cc7480bdfdb825b7b51f16bf8ec0ea56ed0f78754e8c85d7909fe1248adadfb",
+   "size": 376
+  },
+  "dbschema.json": {
+   "sha512": "e6e90a07433c913575ec48175b0a645a00f8e21eb5db1ea41ca4397a7411ff8b",
+   "size": 480
+  },
+  "index.html": {
+   "sha512": "54f81a85e66025b47b53f1a700ae3166c7a398986807ba0b58005c9ee0c4b8dc",
+   "size": 723
+  },
+  "js/all.js": {
+   "sha512": "e3713d61b1db8e93fd916247505f3e81c19d1d2ef9816b67f70981a9a2a22afc",
+   "size": 248713
+  }
+ },
+ "ignore": "((js|css|coffee|db)/(?!all.(js|css))|data/users/.*)",
+ "inner_path": "content.json",
+ "modified": 1456665838.682877,
+ "postmessage_nonce_security": false,
+ "sign": [
+  33574594186795820066317894619284280216294844418544344958796071395729613055514,
+  65078936740023700528097449229796173230736425008952852032895722259729271271757
+ ],
+ "signers_sign": "HPIaGnelkW0KMrKbRomD3EG0EMuob4rLc0e3opuTXVSwe7RSRnxuz3jQUCLbq4Yzv4wjvyqnzcziXfpXcLbgd0w=",
+ "signs": {
+  "1FUQPLXHimgCvYHH7v3bJXspJ7bMBUXcEb": "HMzPVgoXWqPgclV/1yArDCtGSD0ZJgJ03IZtHc3kC7TbUj4zFzDANr2kVpFi6Xht0OGZb5P1mYbSt65KhXiFSPc="
+ },
+ "signs_required": 1,
+ "title": "ZeroTube",
+ "zeronet_version": "0.3.6"
+}

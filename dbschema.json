@@ -1,0 +1,24 @@
+{
+	"db_name": "ZeroTube dev",
+	"db_file": "data/zerotube_dev.db",
+	"version": 2,
+	"maps": {
+		"data.json": {
+			"to_table": ["video"]
+		}
+	},
+	"tables": {
+		"video": {
+			"cols": [
+				["video_id", "INTEGER"],
+				["title", "TEXT"],
+				["description", "TEXT"],
+				["magnet", "TEXT"],
+				["added", "INTEGER"],
+				["json_id", "INTEGER REFERENCES json (json_id)"]
+			],
+			"indexes": ["CREATE UNIQUE INDEX video_key ON video(video_id, json_id)"],
+			"schema_changed": 1
+		}
+	}
+}
