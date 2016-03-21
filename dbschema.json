@@ -3,8 +3,11 @@
 	"db_file": "data/zerotube_dev.db",
 	"version": 2,
 	"maps": {
-		"data.json": {
+		"users/.+/data.json": {
 			"to_table": ["video"]
+		},
+		"users/.+/content.json": {
+			"to_keyvalue": [ "cert_user_id" ]
 		}
 	},
 	"tables": {
@@ -18,7 +21,7 @@
 				["json_id", "INTEGER REFERENCES json (json_id)"]
 			],
 			"indexes": ["CREATE UNIQUE INDEX video_key ON video(video_id, json_id)"],
-			"schema_changed": 1
+			"schema_changed": 2
 		}
 	}
 }

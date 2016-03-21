@@ -15,13 +15,13 @@ class ZeroTube extends ZeroFrame
 	# Wrapper websocket connection ready
 	onOpenWebsocket: (e) =>
 		@cmd "serverInfo", {}, (serverInfo) =>
-			@log "mysite serverInfo response", serverInfo
+			@log "zeroTube serverInfo response", serverInfo
 		@cmd "siteInfo", {}, (siteInfo) =>
-			@log "mysite siteInfo response", siteInfo
+			@log "zeroTube siteInfo response", siteInfo
 
 	selectUser: () =>
 		@cmd "certSelect", [["zeroid.bit"]], (answer) =>
-			@log answer
+			@log "zeroTube certSelect response", answer.params.cert_user_id
 			return false
 
 	submit: (e) =>
