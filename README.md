@@ -1,6 +1,6 @@
 # zeroTube
 
-Decentralized video plateform on ZeroNet using [WebTorrent](http://webtorrent.io/)
+Decentralized video platform on ZeroNet using [WebTorrent](http://webtorrent.io/)
 
 This is still a proof of concept.
 
