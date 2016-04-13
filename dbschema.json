@@ -17,7 +17,7 @@
 				["title", "TEXT"],
 				["description", "TEXT"],
 				["magnet", "TEXT"],
-				["added", "INTEGER"],
+				["date_added", "INTEGER"],
 				["json_id", "INTEGER REFERENCES json (json_id)"]
 			],
 			"indexes": ["CREATE UNIQUE INDEX video_key ON video(video_id, json_id)"],

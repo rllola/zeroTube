@@ -1,2 +1,4 @@
 js/all.js
 data/zerotube_dev.db
+!data/users/content.json
+data/users/*

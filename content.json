@@ -3,24 +3,28 @@
  "description": "Decentralized video plateform",
  "files": {
   "README.md": {
-   "sha512": "51f7965c2c8496cc3563311d960fabfe95be816df235b4030d82c7f34d5976f8",
-   "size": 11
+   "sha512": "129f5ae041b919d06801b179bce8b47c0b8c9e05da8c3ad70ef9b60d1603bd7a",
+   "size": 381
   },
   "css/all.css": {
    "sha512": "07ebc0bbb0cca2a588919c2d4a78c25cc9dfa99e7d234554dc38dd98f59ba305",
    "size": 45
   },
   "dbschema.json": {
-   "sha512": "e6e90a07433c913575ec48175b0a645a00f8e21eb5db1ea41ca4397a7411ff8b",
-   "size": 480
+   "sha512": "bcb10a418b7b4b2bd951319363c3ad8db7684a2a36961128b99fe9bea45e0b14",
+   "size": 560
   },
   "index.html": {
-   "sha512": "e9152eecb694e614f6f218782bf2f5339a23b5bb0904ea80ae858a46a99bce07",
-   "size": 760
+   "sha512": "401263a5b382dbd59bd33c2529bdcbd02b4e941703b57facb5ddbc8a151827af",
+   "size": 1093
   },
   "js/all.js": {
-   "sha512": "4f9170c077c35e5a55671a2683edc26a6b79dc2fcd663c515c3d24e6ab4be45c",
-   "size": 250233
+   "sha512": "e07d2929ce6a6449d4db536a988927f1c305bc4bbb393d87303b94d642f9d747",
+   "size": 253031
+  },
+  "updater/updater.py": {
+   "sha512": "d2c17e043935f3baa0b8812fcb0e87df1788209ee6bbf54613bbaf45236ad293",
+   "size": 41
   }
  },
  "ignore": "((js|css|coffee|db)/(?!all.(js|css))|data/.*|.git)",
@@ -31,15 +35,15 @@
   }
  },
  "inner_path": "content.json",
- "modified": 1458448498.769365,
+ "modified": 1460012424.795077,
  "postmessage_nonce_security": false,
  "sign": [
-  54897812865456741879986840526644710341871992350008519320237275770325764284811,
-  89811818259782039337498919872275395097306780264941530850208567195544552058672
+  15186960423520570657655891821181717788120972480565983382904968238084945767821,
+  28276300012908119321383915980520882939364717791135831895858293334698841531557
  ],
  "signers_sign": "HPIaGnelkW0KMrKbRomD3EG0EMuob4rLc0e3opuTXVSwe7RSRnxuz3jQUCLbq4Yzv4wjvyqnzcziXfpXcLbgd0w=",
  "signs": {
-  "1FUQPLXHimgCvYHH7v3bJXspJ7bMBUXcEb": "G/RQE9su4c+Z6IEFqEUfmvhXoL1BW0GR5bjCb4YJvWtZmDohDH7QA0Qy0JYqnUZSEJzw1JzEpHYM7c/zR6q08p0="
+  "1FUQPLXHimgCvYHH7v3bJXspJ7bMBUXcEb": "Gytc1VqMBWCbZ3qWCoYHhFOcHOPNYfsPMqe3udRj6kUhG51GQsQeoU36ALaLLGD7PN3uQwfGCNqQ17mAzN5KJMY="
  },
  "signs_required": 1,
  "title": "ZeroTube",

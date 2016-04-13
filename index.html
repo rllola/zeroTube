@@ -19,7 +19,20 @@
     </header>
     <main id="result">
     </main>
+    <section id="add">
+      <p>Add a video</p>
+        <form onSubmit="ZeroTube.addVideo(event)">
+          <label for="title">Name :</label><br/>
+          <input id="videoTitle" type="text" name="title" required /> <br/>
+          <label for="descriptio">Description :</label> <br/>
+          <textarea id="videoDescription" name="description" required>Describe the content of your video</textarea> <br/>
+          <label for="file">File :</label><br/>
+          <input id="videoFile" type="file" accept="video/*" name="file" required/><br/><br/>
+          <input type="submit" value="Add"/>
+        </form>
+    </section>
 
+    <script type="text/javascript">localStorage.debug = '*'</script>
     <script type="text/javascript" src="js/all.js"></script>
 
   </body>
