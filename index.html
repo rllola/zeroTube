@@ -5,32 +5,65 @@
     <title>ZeroTube</title>
     <meta charset="utf-8">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/lib/bootstrap.min.css" />
     <link rel="stylesheet" href="css/all.css" />
   </head>
   <body>
-    <header>
-      <h1>ZeroTube</h1>
-      <p>No server for your video and always available.</p>
-      <a href="#Select+user" id="select_user" onclick='return ZeroTube.selectUser()'>Select user</a>
-      <form name="searchForm" onsubmit="ZeroTube.submit(event);">
-        <input id="query" type="text" name="query" placeholder="search" />
-        <input type="submit" value="Submit" />
+    <nav class="navbar navbar-light bg-faded">
+      <a class="navbar-brand col-xs-1" href="#">ZeroTube</a>
+      <form class="form-inline col-xs-8" name="searchForm" onsubmit="ZeroTube.submit(event);">
+        <input class="form-control" id="query" type="text" name="query" placeholder="search" >
+        <input class="btn btn-primary-outline" type="submit" value="Submit" />
       </form>
-    </header>
-    <main id="result">
-    </main>
-    <section id="add">
-      <p>Add a video</p>
-        <form onSubmit="ZeroTube.addVideo(event)">
-          <label for="title">Name :</label><br/>
-          <input id="videoTitle" type="text" name="title" required /> <br/>
-          <label for="descriptio">Description :</label> <br/>
-          <textarea id="videoDescription" name="description" required>Describe the content of your video</textarea> <br/>
-          <label for="file">File :</label><br/>
-          <input id="videoFile" type="file" accept="video/*" name="file" required/><br/><br/>
-          <input type="submit" value="Add"/>
-        </form>
-    </section>
+      <ul class="nav navbar-nav col-xs-2">
+        <li class="nav-item">
+          <a class="nav-link" href="#Select+user" id="select_user" onclick='return ZeroTube.selectUser()'>Select user</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#myModal" href="#">Upload</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="video">
+
+    </div>
+    <div id="result" class="container">
+
+    </div>
+
+    <!-- Modal Upload -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Upload a video</h4>
+          </div>
+          <div class="modal-body">
+            <form onSubmit="ZeroTube.addVideo(event)">
+              <fieldset class="form-group">
+                <label for="title">Name</label>
+                <input id="videoTitle" class="form-control" type="text" name="title" required />
+              </fieldset>
+              <fieldset class="form-group">
+                <label for="description">Description</label>
+                <textarea id="videoDescription" class="form-control" name="description" rows="3" required></textarea>
+              </fieldset>
+              <fieldset class="form-group">
+                <label for="file">Video</label>
+                <input class="form-control-file" id="videoFile" type="file" accept="video/*" name="file" required/><br/><br/>
+              </fieldset>
+              <div class="clearfix">
+                <input class="btn btn-primary-outline pull-right" type="submit" value="Upload"/>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script type="text/javascript">localStorage.debug = '*'</script>
     <script type="text/javascript" src="js/all.js"></script>

@@ -40,15 +40,16 @@ class ZeroTube extends ZeroFrame
 		@cmd "dbQuery", ["SELECT * FROM video WHERE title LIKE '%"+query+"%'"], (videos) =>
 			@log videos
 			if videos.length is 0
-				document.getElementById("result").innerHTML = "<p>No Videos found</p>"
+				$("#result").html("<p>No Videos found</p>")
 			else
+				$("#result").html("")
 				for video, i in videos
-					document.getElementById("result").innerHTML = document.getElementById("result").innerHTML + "<article>
+					$("#result").html($("#result").html() + "<article>
 						<h1>"+video.title+"</h1>
-						<small>Added on the "+new Date(video.added * 1000)+"</small>
+						<small>Added on the "+new Date(video.date_added * 1000)+"</small>
 						<p>"+video.description+"</p>
 						<a href='#"+video.magnet+"' onclick='ZeroTube.watch(this, event);'>Watch</a>
-					</article>"
+					</article>")
 					@log video
 		e.preventDefault()
 
@@ -64,10 +65,11 @@ class ZeroTube extends ZeroFrame
 				@log 'progress: ' + torrent.progress
 				@log '======'
 			file = torrent.files[0]
-			file.appendTo 'header'
+			file.appendTo '#video'
 		event.preventDefault()
 
 	addVideo: (event) =>
+		event.preventDefault()
 		if document.getElementById("videoFile").files.length > 0
 			@log "We have a file to seed"
 			@log "User info :", @siteInfo.auth_address
@@ -107,7 +109,6 @@ class ZeroTube extends ZeroFrame
 							@cmd "wrapperNotification", ["error", "File write error: #{res}"]
 		else
 			@log "Are you meesing with me ? This empty dude !"
-
 		event.preventDefault()
 
 window.ZeroTube = new ZeroTube()
