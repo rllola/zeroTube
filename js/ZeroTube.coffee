@@ -117,7 +117,6 @@ class ZeroTube extends ZeroFrame
 						if res == "ok"
 							# Publish the file to other users
 							@cmd "sitePublish", {"inner_path": inner_path}, (res) =>
-								@log res
 								document.getElementById("videoFile").files = []	# Reset the message input
 						else
 							@cmd "wrapperNotification", ["error", "File write error: #{res}"]

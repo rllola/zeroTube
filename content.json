@@ -11,35 +11,42 @@
    "size": 95610
   },
   "dbschema.json": {
-   "sha512": "805e24537fa1dad1bd2af07bde0cda06464d607a87c905f59790661f62ca358e",
-   "size": 565
+   "sha512": "aba0502e5067cc8340e185442afa038f8c19ad845d3ab58a18bb0d5b99a9d429",
+   "size": 559
   },
   "index.html": {
    "sha512": "e79219bd21062da61b78a6078f5fc4a455bea15ff693a1bd920effac6cad2c0b",
    "size": 2961
   },
   "js/all.js": {
-   "sha512": "b76854a7996288edc85a75445e9a147747cc1c99b0cc113057f8f43a345de4c7",
-   "size": 414494
+   "sha512": "6d9e163fc18ecc0694c261a61a96fcfcd974d0d04b026f8391d81879961f3882",
+   "size": 414457
   }
  },
- "ignore": "((js|css|coffee|db)/(?!all.(js|css))|data/.*|.git)",
+ "ignore": "((js|css|coffee|db)/(?!all.(js|css))|data/users/.*|.git)",
  "includes": {
   "data/users/content.json": {
-   "signers": [],
+   "signers": [ "1FUQPLXHimgCvYHH7v3bJXspJ7bMBUXcEb" ],
    "signers_required": 1
   }
  },
  "inner_path": "content.json",
- "modified": 1461763490.655948,
+ "modified": 1461767290.760904,
  "postmessage_nonce_security": true,
+ "settings": {
+  "admin": "lola@zeroid.bit",
+  "admin_href": "http://127.0.0.1:43110/Mail.ZeroNetwork.bit/?to=lola@zeroid.bit",
+  "topic_sticky_uris": [
+   ""
+  ]
+ },
  "sign": [
-  112395757652525221592590515656788485128705333594514842760297910491260783858527,
-  18891236189252475750407633510347392162749303580616708354299648823713229916343
+  5211086010916766812498620180735710530983597688055330190344703789258395612325,
+  105413280809698302848296060145552379906414790110028573939672960247398524189729
  ],
  "signers_sign": "HPIaGnelkW0KMrKbRomD3EG0EMuob4rLc0e3opuTXVSwe7RSRnxuz3jQUCLbq4Yzv4wjvyqnzcziXfpXcLbgd0w=",
  "signs": {
-  "1FUQPLXHimgCvYHH7v3bJXspJ7bMBUXcEb": "HAE+jzKuWci6AJ/IBsfCGJA7HiOPtiIAkopsXVkTRbl7bowNtQxuuy9OPXk+HpQfHy2QWbBh4h1MikmxY2y5Pdo="
+  "1FUQPLXHimgCvYHH7v3bJXspJ7bMBUXcEb": "HBltDb0ViPqy7u3lIJtcYXd3siqO2NJTndZjCGKY2tV7hwF00plaPGsUS5suqT6uzNmAAu2qQ6sfbbvAbjtfXIg="
  },
  "signs_required": 1,
  "title": "ZeroTube",
