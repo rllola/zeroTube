@@ -21,7 +21,7 @@
 				["json_id", "INTEGER REFERENCES json (json_id)"]
 			],
 			"indexes": ["CREATE UNIQUE INDEX video_key ON video(video_id, json_id)"],
-			"schema_changed": 2
+			"schema_changed": 3
 		}
 	}
 }

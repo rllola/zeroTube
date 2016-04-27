@@ -18,8 +18,20 @@ class ZeroTube extends ZeroFrame
 			# Update currently selected username
 			if siteInfo.cert_user_id
 				document.getElementById("select_user").innerHTML = siteInfo.cert_user_id
-				document.getElementById("add").style.display = 'block'
+				#document.getElementById("add").style.display = 'block'
 			@siteInfo = siteInfo	# Save site info data to allow access it later
+		@cmd "dbQuery", ["SELECT * FROM video LIMIT 5"], (videos) =>
+			$("#result").html("<h2>Latest Videos Added</h2><br/>")
+			for video, i in videos
+				@client.add video.magnet, (torrent) =>
+					@log torrent.numPeers
+					torrent.on 'wire', (wire) =>
+						@log torrent.numPeers
+				$("#result").html($("#result").html() + "<article>
+					<a href='#"+video.magnet+"' onclick='ZeroTube.watch(this, event);'><h3>"+video.title+"</h3></a>
+					<small>Added on the "+new Date(video.date_added * 1000)+"</small>
+					<p>"+video.description+"</p>
+				</article>")
 
 	selectUser: () =>
 		@cmd "certSelect", [["zeroid.bit"]]
@@ -29,10 +41,10 @@ class ZeroTube extends ZeroFrame
 		if cmd == "setSiteInfo"
 			if message.params.cert_user_id
 				document.getElementById("select_user").innerHTML = message.params.cert_user_id
-				document.getElementById("add").style.display = 'block'
+				#document.getElementById("add").style.display = 'block'
 			else
 				document.getElementById("select_user").innerHTML = "Select user"
-				document.getElementById("add").style.display = 'none'
+				#document.getElementById("add").style.display = 'none'
 			@siteInfo = message.params	# Save site info data to allow access it later
 
 	submit: (e) =>
@@ -44,8 +56,12 @@ class ZeroTube extends ZeroFrame
 			else
 				$("#result").html("")
 				for video, i in videos
+					@client.add video.magnet, (torrent) =>
+						@log torrent.numPeers
+						torrent.on 'wire', (wire) =>
+							@log torrent.numPeers
 					$("#result").html($("#result").html() + "<article>
-						<h1>"+video.title+"</h1>
+						<a href='#"+video.magnet+"' onclick='ZeroTube.watch(this, event);'><h3>"+video.title+"</h3></a>
 						<small>Added on the "+new Date(video.date_added * 1000)+"</small>
 						<p>"+video.description+"</p>
 						<a href='#"+video.magnet+"' onclick='ZeroTube.watch(this, event);'>Watch</a>
@@ -72,7 +88,6 @@ class ZeroTube extends ZeroFrame
 		event.preventDefault()
 		if document.getElementById("videoFile").files.length > 0
 			@log "We have a file to seed"
-			@log "User info :", @siteInfo.auth_address
 			if not @siteInfo.cert_user_id	# No account selected, display error
 				@cmd "wrapperNotification", ["info", "Please, select your account."]
 				return false
@@ -94,7 +109,6 @@ class ZeroTube extends ZeroFrame
 						"magnet": torrent.magnetURI,
 						"date_added": (+new Date)
 					})
-					@log data[-1]
 					# Encode data array to utf8 json text
 					json_raw = unescape(encodeURIComponent(JSON.stringify(data, undefined, '\t')))
 

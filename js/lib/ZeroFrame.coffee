@@ -2,6 +2,7 @@ class ZeroFrame
 	constructor: (url) ->
 		@url = url
 		@waiting_cb = {}
+		@wrapper_nonce = document.location.href.replace(/.*wrapper_nonce=([A-Za-z0-9]+).*/, "$1")
 		@connect()
 		@next_message_id = 1
 		@init()
@@ -13,7 +14,7 @@ class ZeroFrame
 
 	connect: ->
 		@target = window.parent
-		window.addEventListener("message", @onMessage, false) 
+		window.addEventListener("message", @onMessage, false)
 		@cmd("innerReady")
 
 
@@ -50,6 +51,7 @@ class ZeroFrame
 
 
 	send: (message, cb=null) ->
+		message.wrapper_nonce = @wrapper_nonce
 		message.id = @next_message_id
 		@next_message_id += 1
 		@target.postMessage(message, "*")
