@@ -20,15 +20,16 @@ class ZeroTube extends ZeroFrame
 				document.getElementById("select_user").innerHTML = siteInfo.cert_user_id
 				#document.getElementById("add").style.display = 'block'
 			@siteInfo = siteInfo	# Save site info data to allow access it later
-		@cmd "dbQuery", ["SELECT * FROM video LIMIT 5"], (videos) =>
+		@cmd "dbQuery", ["SELECT * FROM video ORDER BY date_added DESC LIMIT 5"], (videos) =>
 			$("#result").html("<h2>Latest Videos Added</h2><br/>")
 			for video, i in videos
 				@client.add video.magnet, (torrent) =>
-					@log torrent.numPeers
+					torrent.pause()
+					$("#"+torrent.infoHash).html(torrent.numPeers+" peers")
 					torrent.on 'wire', (wire) =>
-						@log torrent.numPeers
+						$("#"+torrent.infoHash).html(torrent.numPeers+" peers")
 				$("#result").html($("#result").html() + "<article>
-					<a href='#"+video.magnet+"' onclick='ZeroTube.watch(this, event);'><h3>"+video.title+"</h3></a>
+					<a href='#"+video.magnet+"' onclick='ZeroTube.watch(this, event);'><h3>"+video.title+" <span id='"+video.video_id+"' class='label label-pill label-info'>0 Peers</span></h3></a>
 					<small>Added on the "+new Date(video.date_added * 1000)+"</small>
 					<p>"+video.description+"</p>
 				</article>")
@@ -57,16 +58,15 @@ class ZeroTube extends ZeroFrame
 				$("#result").html("")
 				for video, i in videos
 					@client.add video.magnet, (torrent) =>
-						@log torrent.numPeers
+						torrent.pause()
+						$("#"+torrent.infoHash).html(torrent.numPeers+" peers")
 						torrent.on 'wire', (wire) =>
-							@log torrent.numPeers
+							$("#"+torrent.infoHash).html(torrent.numPeers+" peers")
 					$("#result").html($("#result").html() + "<article>
-						<a href='#"+video.magnet+"' onclick='ZeroTube.watch(this, event);'><h3>"+video.title+"</h3></a>
+						<a href='#"+video.magnet+"' onclick='ZeroTube.watch(this, event);'><h3>"+video.title+" <span id='"+video.video_id+"' class='label label-pill label-info'> 0 peers</span></h3></a>
 						<small>Added on the "+new Date(video.date_added * 1000)+"</small>
 						<p>"+video.description+"</p>
-						<a href='#"+video.magnet+"' onclick='ZeroTube.watch(this, event);'>Watch</a>
 					</article>")
-					@log video
 		e.preventDefault()
 
 	watch: (element, event) =>
@@ -81,7 +81,8 @@ class ZeroTube extends ZeroFrame
 				@log 'progress: ' + torrent.progress
 				@log '======'
 			file = torrent.files[0]
-			file.appendTo '#video'
+			$("#video").show();
+			file.renderTo '#video'
 		event.preventDefault()
 
 	addVideo: (event) =>
@@ -104,6 +105,7 @@ class ZeroTube extends ZeroFrame
 						data = 	{"video": []}
 					# Add the message to data
 					data.video.push({
+						"video_id": torrent.infoHash,
 						"title": document.getElementById("videoTitle").value,
 						"description": document.getElementById("videoDescription").value,
 						"magnet": torrent.magnetURI,
