@@ -30,7 +30,7 @@ class ZeroTube extends ZeroFrame
 						$("#"+torrent.infoHash).html(torrent.numPeers+" peers")
 				$("#result").html($("#result").html() + "<article>
 					<a href='#"+video.magnet+"' onclick='ZeroTube.watch(this, event);'><h3>"+video.title+" <span id='"+video.video_id+"' class='label label-pill label-info'>0 Peers</span></h3></a>
-					<small>Added on the "+new Date(video.date_added * 1000)+"</small>
+					<small>Added "+moment(video.date_added).fromNow()+"</small>
 					<p>"+video.description+"</p>
 				</article>")
 
@@ -64,7 +64,7 @@ class ZeroTube extends ZeroFrame
 							$("#"+torrent.infoHash).html(torrent.numPeers+" peers")
 					$("#result").html($("#result").html() + "<article>
 						<a href='#"+video.magnet+"' onclick='ZeroTube.watch(this, event);'><h3>"+video.title+" <span id='"+video.video_id+"' class='label label-pill label-info'> 0 peers</span></h3></a>
-						<small>Added on the "+new Date(video.date_added * 1000)+"</small>
+						<small>Added "+moment(video.date_added).fromNow()+"</small>
 						<p>"+video.description+"</p>
 					</article>")
 		e.preventDefault()

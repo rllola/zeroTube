@@ -19,8 +19,8 @@
    "size": 3010
   },
   "js/all.js": {
-   "sha512": "db60066d1e72ee6a538b4e85840f6e7f677fde958e5571b802d89010b43c825e",
-   "size": 414808
+   "sha512": "4daeb8e11d8e6d1249fe6608e01b182433468dea7732f17b5c1a5d84c0475394",
+   "size": 415372
   }
  },
  "ignore": "((js|css|coffee|db)/(?!all.(js|css))|data/.*|.git)",
@@ -31,7 +31,7 @@
   }
  },
  "inner_path": "content.json",
- "modified": 1462097774.802132,
+ "modified": 1463671924.149504,
  "postmessage_nonce_security": true,
  "settings": {
   "admin": "lola@zeroid.bit",
@@ -41,12 +41,12 @@
   ]
  },
  "sign": [
-  55004906569745821980074488277160439855904963239888810202256539166157159935371,
-  11485489962755774952269143716843900610127582522388774901282243344053758334175
+  88250207507333184683561692963525155883500198195802940297235617604476536980944,
+  6328019080011855894290107948440915723602684752609379967537533381196987998615
  ],
  "signers_sign": "HPIaGnelkW0KMrKbRomD3EG0EMuob4rLc0e3opuTXVSwe7RSRnxuz3jQUCLbq4Yzv4wjvyqnzcziXfpXcLbgd0w=",
  "signs": {
-  "1FUQPLXHimgCvYHH7v3bJXspJ7bMBUXcEb": "G1P20mBWKuC5+URHIzTxL1/JicoYJZjvl9gvo+AwfiVahKyDMhafLJa0HhHjw/Qe69w1Wi6uphKrea4K0r382rk="
+  "1FUQPLXHimgCvYHH7v3bJXspJ7bMBUXcEb": "HFwgWOdqTdO7UWEap4gYT7NdOw/cSHCOQgooAYXrjOsVccKnoUAOArORc+rxU0QowLFZgQ0bHkwhJKIKb3JKe1Y="
  },
  "signs_required": 1,
  "title": "ZeroTube",
