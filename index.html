@@ -43,7 +43,7 @@
             <h4 class="modal-title" id="myModalLabel">Upload a video</h4>
           </div>
           <div class="modal-body">
-            <form onSubmit="ZeroTube.addVideo(event)">
+            <form id="add" style="display:none;" onSubmit="ZeroTube.addVideo(event)">
               <fieldset class="form-group">
                 <label for="title">Name</label>
                 <input id="videoTitle" class="form-control" type="text" name="title" required />
@@ -60,6 +60,10 @@
                 <input class="btn btn-primary-outline pull-right" type="submit" value="Upload"/>
               </div>
             </form>
+            <div id="login" style="display:block;" class="alert alert-danger" role="alert">
+                <strong>Sorry !</strong> You need to have a zeroID to upload a video.<br/>
+                <a class="nav-link" href="#Select+user" id="select_user" onclick='return ZeroTube.selectUser()'>Select user</a>
+            </div>
           </div>
         </div>
       </div>

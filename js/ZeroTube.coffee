@@ -18,7 +18,8 @@ class ZeroTube extends ZeroFrame
 			# Update currently selected username
 			if siteInfo.cert_user_id
 				document.getElementById("select_user").innerHTML = siteInfo.cert_user_id
-				#document.getElementById("add").style.display = 'block'
+				document.getElementById("add").style.display = 'block'
+				document.getElementById("login").style.display = 'none'
 			@siteInfo = siteInfo	# Save site info data to allow access it later
 		@cmd "dbQuery", ["SELECT * FROM video ORDER BY date_added DESC LIMIT 5"], (videos) =>
 			$("#result").html("<h2>Latest Videos Added</h2><br/>")
@@ -42,10 +43,12 @@ class ZeroTube extends ZeroFrame
 		if cmd == "setSiteInfo"
 			if message.params.cert_user_id
 				document.getElementById("select_user").innerHTML = message.params.cert_user_id
-				#document.getElementById("add").style.display = 'block'
+				document.getElementById("add").style.display = 'block'
+				document.getElementById("login").style.display = 'none'
 			else
 				document.getElementById("select_user").innerHTML = "Select user"
-				#document.getElementById("add").style.display = 'none'
+				document.getElementById("add").style.display = 'none'
+				document.getElementById("login").style.display = 'block'
 			@siteInfo = message.params	# Save site info data to allow access it later
 
 	submit: (e) =>
