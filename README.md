@@ -1,4 +1,4 @@
-# zeroTube
+![ZeroTube Logo](/img/zero_degrade.png)
 
 Decentralized video platform on ZeroNet using [WebTorrent](http://webtorrent.io/)
 
