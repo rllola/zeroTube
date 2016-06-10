@@ -10,17 +10,20 @@
   </head>
   <body>
     <nav class="navbar navbar-light bg-faded">
-      <a class="navbar-brand col-xs-1" href="#">ZeroTube</a>
-      <form class="form-inline col-xs-8" name="searchForm" onsubmit="ZeroTube.submit(event);">
+      <a class="navbar-brand col-xs-1" href="#"><img src="img/zero_bleu.png" height="35" /></a>
+      <form class="form-inline col-xs-6" name="searchForm" onsubmit="ZeroTube.submit(event);">
         <input class="form-control" id="query" type="text" name="query" placeholder="search" >
         <input class="btn btn-primary-outline" type="submit" value="Submit" />
       </form>
-      <ul class="nav navbar-nav col-xs-2">
+      <ul class="nav navbar-nav col-xs-3">
         <li class="nav-item">
           <a class="nav-link" href="#Select+user" id="select_user" onclick='return ZeroTube.selectUser()'>Select user</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#myModal" href="#">Upload</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#How" href="#">How it works</a>
         </li>
       </ul>
     </nav>
@@ -43,6 +46,10 @@
             <h4 class="modal-title" id="myModalLabel">Upload a video</h4>
           </div>
           <div class="modal-body">
+            <div id="file-added" style="display:none;" class="alert alert-info" role="alert">
+                <strong>Success !</strong> Your video has been added successfully ! Add the link below to your Webtorrent Desktop !<br/>
+                <a id="success-magnetURI" class="nav-link" href=""></a>
+            </div>
             <form id="add" style="display:none;" onSubmit="ZeroTube.addVideo(event)">
               <fieldset class="form-group">
                 <label for="title">Name</label>

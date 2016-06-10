@@ -100,6 +100,7 @@ class ZeroTube extends ZeroFrame
 
 			torrent = @client.seed document.getElementById("videoFile").files[0], (torrent) =>
 				@log 'Client is seeding:', torrent.infoHash
+				@log 'The Magnet URI :', torrent.infoHash
 				# Load our current videos
 				@cmd "fileGet", {"inner_path": inner_path, "required": false}, (data) =>
 					if data	# Parse if already exits
@@ -121,8 +122,12 @@ class ZeroTube extends ZeroFrame
 					@cmd "fileWrite", [inner_path, btoa(json_raw)], (res) =>
 						if res == "ok"
 							# Publish the file to other users
+							#document.getElementById("videoFile").value = ""
+							$("success-magnetURI").attr("href",torrent.magnetURI)
+							$("#success-magnetURI").html(torrent.magnetURI)
+							document.getElementById("file-added").style.display = 'block'
 							@cmd "sitePublish", {"inner_path": inner_path}, (res) =>
-								document.getElementById("videoFile").files = []	# Reset the message input
+								@log "Update Published !"
 						else
 							@cmd "wrapperNotification", ["error", "File write error: #{res}"]
 		else
