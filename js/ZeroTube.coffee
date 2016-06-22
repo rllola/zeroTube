@@ -12,6 +12,21 @@ class ZeroTube extends ZeroFrame
 		else
 			@log "not supported"
 
+	routeUrl: (url) ->
+		@log "Routing url:", url
+		if match = url.match /how-to/
+			@log 'How To'
+			$('main').html("<h1>
+			  How To ZeroTube !
+			</h1>")
+		else
+			@log 'LOL'
+			$('main').html("<video style='display:none' id='video' width='100%'' controls autoplay></video>
+			  <div id='latest' style='margin-top:15px;'>
+			  </div>
+			  <div id='result'>
+			  </div>")
+
 	# Wrapper websocket connection ready
 	onOpenWebsocket: (e) =>
 		@cmd "siteInfo", {}, (siteInfo) =>
@@ -22,6 +37,7 @@ class ZeroTube extends ZeroFrame
 				document.getElementById("login").style.display = 'none'
 			@siteInfo = siteInfo	# Save site info data to allow access it later
 		@cmd "dbQuery", ["SELECT * FROM video ORDER BY date_added DESC LIMIT 5"], (videos) =>
+			@routeUrl(window.location.search.substring(1))
 			$("#result").html("<h2>Latest Videos Added</h2><br/>")
 			for video, i in videos
 				@client.add video.magnet, (torrent) =>
