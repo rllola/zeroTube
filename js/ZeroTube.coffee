@@ -15,7 +15,7 @@ class ZeroTube extends ZeroFrame
 	routeUrl: (url) ->
 		@log "Routing url:", url
 		if match = url.match /how-to/
-			@log 'How To'
+			HowTo.log 'HowTo'
 			$('main').html("<h1>
 			  How To ZeroTube !
 			</h1>")

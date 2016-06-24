@@ -54,6 +54,7 @@ class ZeroFrame
 		message.wrapper_nonce = @wrapper_nonce
 		message.id = @next_message_id
 		@next_message_id += 1
+		@log message
 		@target.postMessage(message, "*")
 		if cb
 			@waiting_cb[message.id] = cb
