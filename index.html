@@ -10,14 +10,14 @@
   </head>
   <body>
     <nav class="navbar navbar-light bg-faded">
-      <a class="navbar-brand col-xs-1" href="?Home"><img src="img/zero_bleu.png" height="35" /></a>
+      <a class="navbar-brand col-xs-1" href="#"><img src="img/zero_bleu.png" height="35" /></a>
       <form class="form-inline col-xs-6" name="searchForm" onsubmit="ZeroTube.submit(event);">
         <input class="form-control" id="query" type="text" name="query" placeholder="search" >
         <input class="btn btn-primary-outline" type="submit" value="Submit" />
       </form>
       <ul class="nav navbar-nav col-xs-3">
         <li class="nav-item">
-          <a class="nav-link" href="#Select+user" id="select_user" onclick='return ZeroTube.selectUser()'>Select user</a>
+          <a class="nav-link" href="#Select+user" id="select_user" onclick="return ZeroTube.selectUser()">Select user</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#myModal" href="#">Upload</a>
@@ -27,7 +27,9 @@
         </li>
       </ul>
     </nav>
+
     <main class="container">
+
     </main>
 
     <!-- Modal Upload -->

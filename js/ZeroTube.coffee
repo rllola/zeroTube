@@ -15,17 +15,26 @@ class ZeroTube extends ZeroFrame
 	routeUrl: (url) ->
 		@log "Routing url:", url
 		if match = url.match /how-to/
-			HowTo.log 'HowTo'
 			$('main').html("<h1>
-			  How To ZeroTube !
-			</h1>")
+		         How To ZeroTube !
+						 <p>ZeroTube is an plateform that allow to share videos. You can find the code and report bug on the <a href='https://github.com/rllola/zeroTube'>github</a>.
+						 <br/>
+						 <br/>
+						 It use webtorrent to download and seed the videos. More information on the project <a href='https://webtorrent.io/'>here</a>
+						 <br/> Careful because it use Webrtc and make your IP vunerable.
+						 <br/>
+						 <br/>
+						 To use ZeroTube you can look for videos or add one. If you add one please think of adding it to webtorrent desktop and keep it open.
+						 You can then seed the videos even if your zeronet app is not running and you can check how many people is viewing/seeding your video.
+						 <br/>
+						 <br/>
+						 Like the project ? Then support Zeronet.
+						 </p>
+		        </h1>")
 		else
-			@log 'LOL'
 			$('main').html("<video style='display:none' id='video' width='100%'' controls autoplay></video>
-			  <div id='latest' style='margin-top:15px;'>
-			  </div>
-			  <div id='result'>
-			  </div>")
+							<div id='result'>
+							</div>")
 
 	# Wrapper websocket connection ready
 	onOpenWebsocket: (e) =>
@@ -36,8 +45,8 @@ class ZeroTube extends ZeroFrame
 				document.getElementById("add").style.display = 'block'
 				document.getElementById("login").style.display = 'none'
 			@siteInfo = siteInfo	# Save site info data to allow access it later
+		@routeUrl(window.location.search.substring(1))
 		@cmd "dbQuery", ["SELECT * FROM video ORDER BY date_added DESC LIMIT 5"], (videos) =>
-			@routeUrl(window.location.search.substring(1))
 			$("#result").html("<h2>Latest Videos Added</h2><br/>")
 			for video, i in videos
 				@client.add video.magnet, (torrent) =>
