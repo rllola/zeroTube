@@ -15,22 +15,22 @@ class ZeroTube extends ZeroFrame
 	routeUrl: (url) ->
 		@log "Routing url:", url
 		if match = url.match /how-to/
-			$('main').html("<h1>
-		         How To ZeroTube !
-						 <p>ZeroTube is an plateform that allow to share videos. You can find the code and report bug on the <a href='https://github.com/rllola/zeroTube'>github</a>.
-						 <br/>
-						 <br/>
-						 It use webtorrent to download and seed the videos. More information on the project <a href='https://webtorrent.io/'>here</a>
-						 <br/> Careful because it use Webrtc and make your IP vunerable.
-						 <br/>
-						 <br/>
-						 To use ZeroTube you can look for videos or add one. If you add one please think of adding it to webtorrent desktop and keep it open.
-						 You can then seed the videos even if your zeronet app is not running and you can check how many people is viewing/seeding your video.
-						 <br/>
-						 <br/>
-						 Like the project ? Then support Zeronet.
-						 </p>
-		        </h1>")
+			$('main').html("<h1>How To ZeroTube !</h1>
+				<br/>
+				<br/>
+				<p>ZeroTube is an plateform that allow to share videos. You can find the code and report bug on the <a href='https://github.com/rllola/zeroTube'>github</a>.
+				<br/>
+				<br/>
+				It use webtorrent to download and seed the videos. More information on the project <a href='https://webtorrent.io/'>here</a>
+				<br/> Careful because it use Webrtc and make your IP vunerable.
+				<br/>
+				<br/>
+				To use ZeroTube you can look for videos or add one. If you add one please think of adding it to webtorrent desktop and keep it open.
+				You can then seed the videos even if your zeronet app is not running and you can check how many people is viewing/seeding your video.
+				<br/>
+				<br/>
+				Like the project ? Then support Zeronet.
+				</p>")
 		else
 			$('main').html("<video style='display:none' id='video' width='100%'' controls autoplay></video>
 							<div id='result'>
