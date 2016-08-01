@@ -3,4 +3,3 @@ data/
 !data/users/content.json.example
 node_modules/
 public/js/
-content.json

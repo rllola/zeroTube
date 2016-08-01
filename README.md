@@ -1,4 +1,4 @@
-![ZeroTube Logo](/img/zero_degrade.png)
+![ZeroTube Logo](/public/img/zero_degrade.png)
 
 Decentralized video platform on ZeroNet using [WebTorrent](http://webtorrent.io/)
 
@@ -10,7 +10,11 @@ Because I can.
 
 ### TODO
 
-A list of cool things to add.
+- [x] React migration
+- [ ] Login/Logout
+- [ ] Adding video
+
+And that would be nice to have that so far...
 
 ### Support
 
