@@ -1,5 +1,5 @@
-js/all.js
-data/zerotube_dev.db
-data/users/*
-!content.json
-data/users/*/content.json
+content.json
+data/
+node_modules/
+.jshintrc
+public/js/

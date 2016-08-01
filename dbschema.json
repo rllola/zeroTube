@@ -1,6 +1,6 @@
 {
-	"db_name": "ZeroTube dev",
-	"db_file": "data/zerotube_dev.db",
+	"db_name": "ZeroTube",
+	"db_file": "data/zerotube.db",
 	"version": 2,
 	"maps": {
 		".+/data.json": {

@@ -1,62 +1,25 @@
 {
- "address": "1FUQPLXHimgCvYHH7v3bJXspJ7bMBUXcEb",
- "description": "Decentralized video platform",
+ "address": "1Q7tdNp38yky9pWidPXa6QV8H8e3sxqYeR",
+ "description": "",
  "files": {
-  "README.md": {
-   "sha512": "c003087f7c31602f648e3da350af7d3ad00fa55c47a762a1dc78c9e16db58315",
-   "size": 409
-  },
-  "css/all.css": {
-   "sha512": "7139f239521b295ba7ee69a26a1db2679a4b8d61b5cec1bdb378c1a30931f94a",
-   "size": 95610
-  },
-  "dbschema.json": {
-   "sha512": "f91b4e75953a3e252984b1dd6206fd5b6987da2c45adb005793fdcce2757c851",
-   "size": 553
-  },
-  "img/zero_bleu.png": {
-   "sha512": "71623194bf02f9876b735b5c525e8593312d480891a50dcf90e5bcc164edc296",
-   "size": 11951
-  },
-  "img/zero_degrade.png": {
-   "sha512": "2d7209311bc09a94a9c9ce7afb49488bd5cb34bcfd49823a0ceed404845ee28a",
-   "size": 13253
-  },
   "index.html": {
-   "sha512": "643eb9e7732c4b2e573ec996d4d6aa7981a6279b9e76ef7b83429ffee9eb27d8",
-   "size": 3840
-  },
-  "js/all.js": {
-   "sha512": "30ed0a62610e37b8abc6590537d792ef9c2c39a42766fdac90dee659f1396e01",
-   "size": 462547
+   "sha512": "04225c24ada343b71668ff04146a092c8fa663d2a968063204ecb869e0f91ca6",
+   "size": 41
   }
  },
- "ignore": "((js|css|coffee|db)/(?!all.(js|css))|data/.*|.git)",
- "includes": {
-  "data/users/content.json": {
-   "signers": [ "1FUQPLXHimgCvYHH7v3bJXspJ7bMBUXcEb" ],
-   "signers_required": 1
-  }
- },
+ "ignore": "",
  "inner_path": "content.json",
- "modified": 1465589233.376026,
+ "modified": 1470051729.227659,
  "postmessage_nonce_security": true,
- "settings": {
-  "admin": "lola@zeroid.bit",
-  "admin_href": "http://127.0.0.1:43110/Mail.ZeroNetwork.bit/?to=lola@zeroid.bit",
-  "topic_sticky_uris": [
-   ""
-  ]
- },
  "sign": [
-  74094915898394529523550336874878851415208457521663697879391846092599758818580,
-  58202275819685228087732070042329880007072757165093943461670071125507429165366
+  59059549561991879907623803631330662326103502768138578467157016226708264159699,
+  22003044443018965081382496777439026213780874056985613569830349173582480232255
  ],
- "signers_sign": "HPIaGnelkW0KMrKbRomD3EG0EMuob4rLc0e3opuTXVSwe7RSRnxuz3jQUCLbq4Yzv4wjvyqnzcziXfpXcLbgd0w=",
+ "signers_sign": "HFX8Ge0Sqj0sy6Il4XewV1ntyY0FfWzQibOiqXqcrmTjRdpEV0WPAOEQKV/SCB/2Tq+4IiyJDJsCxMqI56mrfas=",
  "signs": {
-  "1FUQPLXHimgCvYHH7v3bJXspJ7bMBUXcEb": "G3Y9NaTjAU09vFPfymRQBeOe7acgkId5sRCFt6vVeu/YXZUu6BS/sphWUB4fjsus1VulCVPXiv0ehblROnZRFo4="
+  "1Q7tdNp38yky9pWidPXa6QV8H8e3sxqYeR": "GxVUglZdNs1tbiDXeYnZOmR79QIdP4DetFj1o5RpyV3S7gR0S09ZlqI5EZf/64AC+bwin1SdZ8jyrs3W/IzpfJs="
  },
  "signs_required": 1,
- "title": "ZeroTube",
+ "title": "ZeroTube Dev",
  "zeronet_version": "0.3.7"
 }

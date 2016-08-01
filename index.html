@@ -1,80 +1,15 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ZeroTube dev</title>
+    <link rel="stylesheet" href="public/css/all.css">
+</head>
+<body>
 
-<html>
-  <head>
-    <title>ZeroTube</title>
-    <meta charset="utf-8">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/all.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-light bg-faded">
-      <a class="navbar-brand col-xs-1" href="#"><img src="img/zero_bleu.png" height="35" /></a>
-      <form class="form-inline col-xs-6" name="searchForm" onsubmit="ZeroTube.submit(event);">
-        <input class="form-control" id="query" type="text" name="query" placeholder="search" >
-        <input class="btn btn-primary-outline" type="submit" value="Submit" />
-      </form>
-      <ul class="nav navbar-nav col-xs-3">
-        <li class="nav-item">
-          <a class="nav-link" href="#Select+user" id="select_user" onclick="return ZeroTube.selectUser()">Select user</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#myModal" href="#">Upload</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="?how-to">How it works</a>
-        </li>
-      </ul>
-    </nav>
+<div id="root"></div>
 
-    <main class="container">
+<script src="public/js/all.js"></script>
 
-    </main>
-
-    <!-- Modal Upload -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Upload a video</h4>
-          </div>
-          <div class="modal-body">
-            <div id="file-added" style="display:none;" class="alert alert-info" role="alert">
-                <strong>Success !</strong> Your video has been added successfully ! Add the link below to your Webtorrent Desktop !<br/>
-                <a id="success-magnetURI" class="nav-link" href=""></a>
-            </div>
-            <form id="add" style="display:none;" onSubmit="ZeroTube.addVideo(event)">
-              <fieldset class="form-group">
-                <label for="title">Name</label>
-                <input id="videoTitle" class="form-control" type="text" name="title" required />
-              </fieldset>
-              <fieldset class="form-group">
-                <label for="description">Description</label>
-                <textarea id="videoDescription" class="form-control" name="description" rows="3" required></textarea>
-              </fieldset>
-              <fieldset class="form-group">
-                <label for="file">Video</label>
-                <input class="form-control-file" id="videoFile" type="file" accept="video/*" name="file" required/><br/><br/>
-              </fieldset>
-              <div class="clearfix">
-                <input class="btn btn-primary-outline pull-right" type="submit" value="Upload"/>
-              </div>
-            </form>
-            <div id="login" style="display:block;" class="alert alert-danger" role="alert">
-                <strong>Sorry !</strong> You need to have a zeroID to upload a video.<br/>
-                <a class="nav-link" href="#Select+user" id="select_user" onclick='return ZeroTube.selectUser()'>Select user</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script type="text/javascript">localStorage.debug = '*'</script>
-    <script type="text/javascript" src="js/all.js"></script>
-
-  </body>
+</body>
 </html>
