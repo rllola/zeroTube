@@ -20,4 +20,4 @@ And that would be nice to have that so far...
 
 Please support [ZeroNet](https://zeronet.readthedocs.org/en/latest/help_zeronet/donate/).
 
-Want to contribute ? You can contact me at [lola@zeroid.bit](lola@zeroid.bit)
+Want to contribute ? You can contact me at [lola@zeroid.bit](mailto:lola@zeroid.bit)
