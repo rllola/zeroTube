@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Constants from '../util/constants';
+import Login from './login';
 import { Link } from 'react-router';
 
 
@@ -17,7 +18,7 @@ class MainLayout extends Component {
           </div>
           <ul className="nav navbar-nav col-xs-3">
             <li className="nav-item">
-              <a className="nav-link" href="#Select+user" id="select_user" onclick="return ZeroTube.selectUser()">Select user</a>
+              <Login />
             </li>
             <li className="nav-item">
               <a className="nav-link" data-toggle="modal" data-target="#myModal" href="#">Upload</a>
