@@ -13,8 +13,18 @@ class Login extends Component {
   }
 
   render () {
+    let user
+
+    if (this.props.site.cert_user_id) {
+      user = this.props.site.cert_user_id
+    } else {
+      user = 'Select user'
+    }
+
     return (
-      <a className='nav-link' href='#' id='select_user' onClick={this.handleClick}>Select user</a>
+      <div>
+        <a className="nav-link" href="#" onClick={this.handleClick}>{user}</a>
+      </div>
     )
   }
 };
