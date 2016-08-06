@@ -1,0 +1,1 @@
+export const UPDATE_VIDEOS = 'UPDATE_VIDEOS'
