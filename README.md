@@ -12,6 +12,7 @@ Because I can.
 
 - [x] React migration
 - [x] Login/Logout
+- [ ] Search videos
 - [ ] Adding video
 - [ ] "How it works ?" page
 - [ ] Swagger home page needed
