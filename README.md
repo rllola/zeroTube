@@ -11,10 +11,11 @@ Because I can.
 ### TODO
 
 - [x] React migration
-- [ ] Login/Logout
+- [x] Login/Logout
 - [ ] Adding video
 - [ ] "How it works ?" page
 - [ ] Swagger home page needed
+- [ ] Profile page
 
 And that would be nice to have that so far...
 
