@@ -13,6 +13,8 @@ Because I can.
 - [x] React migration
 - [ ] Login/Logout
 - [ ] Adding video
+- [ ] "How it works ?" page
+- [ ] Swagger home page needed
 
 And that would be nice to have that so far...
 

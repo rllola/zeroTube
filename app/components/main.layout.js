@@ -23,7 +23,7 @@ class MainLayout extends Component {
               <a className="nav-link" data-toggle="modal" data-target="#myModal" href="#">Upload</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="?how-to">How it works</a>
+              <Link className="nav-link" to="how">How it works</Link>
             </li>
           </ul>
         </nav>
