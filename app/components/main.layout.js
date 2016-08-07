@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import Constants from '../util/constants';
-import Login from './login';
-import { Link } from 'react-router';
-
+import React, { Component } from 'react'
+import Constants from '../util/constants'
+import Login from './login'
+import { Link } from 'react-router'
 
 class MainLayout extends Component {
-  render() {
+  render () {
+    let style = {
+      paddingTop: '20px'
+    }
     return (
       <div className="app">
         <nav className="navbar navbar-light bg-faded">
@@ -21,19 +23,19 @@ class MainLayout extends Component {
               <Login />
             </li>
             <li className="nav-item">
-              <a className="nav-link" data-toggle="modal" data-target="#myModal" href="#">Upload</a>
+              <Link className="nav-link" to="upload">Upload</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="how">How it works</Link>
             </li>
           </ul>
         </nav>
-        <main className="container">
+        <main className="container" style={style}>
           {this.props.children}
         </main>
       </div>
-    );
+    )
   }
 }
 
-export default MainLayout;
+export default MainLayout
