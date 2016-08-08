@@ -13,7 +13,7 @@ Because I can.
 - [x] React migration
 - [x] Login/Logout
 - [ ] Search videos
-- [ ] Adding video
+- [x] Adding video
 - [ ] "How it works ?" page
 - [ ] Swagger home page needed
 - [ ] Profile page
@@ -24,4 +24,4 @@ And that would be nice to have that so far...
 
 Please support [ZeroNet](https://zeronet.readthedocs.org/en/latest/help_zeronet/donate/).
 
-Want to contribute ? You can contact me via ZeroMail at [lola@zeroid.bit](mailto:lola@zeroid.bit)
+Want to contribute ? You can contact me via ZeroMail at [lola@zeroid.bit](http://127.0.0.1:43110/Mail.ZeroNetwork.bit/?to=lola)
