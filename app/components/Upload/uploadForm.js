@@ -51,7 +51,7 @@ class UploadForm extends Component {
         let jsonRaw = unescape(encodeURIComponent(JSON.stringify(data, undefined, '\t')))
         ZeroFrame.cmd('fileWrite', [innerPath, window.btoa(jsonRaw)], (res) => {
           if (res === 'ok') {
-            this.setState({uploaded: true, magnetURI: torrent.magnetURI})
+            this.setState({uploaded: true, magnetURI: torrent.magnetURI, name: '', description: ''})
             ZeroFrame.cmd('sitePublish', {'inner_path': innerPath}, (res) => {
               console.log(res)
             })
