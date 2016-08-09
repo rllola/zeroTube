@@ -70,11 +70,8 @@ class UploadForm extends Component {
   render () {
     if (this.state.uploaded) {
       return (
-        <Success magnetURI={this.state.magnetURI} />
-        )
-    } else {
-      return (
         <div>
+          <Success magnetURI={this.state.magnetURI} />
           <form onSubmit={this.handleSubmit}>
             <fieldset className="form-group">
               <label htmlFor="title">Title</label>
@@ -93,6 +90,26 @@ class UploadForm extends Component {
             </div>
           </form>
         </div>
+        )
+    } else {
+      return (
+          <form onSubmit={this.handleSubmit}>
+            <fieldset className="form-group">
+              <label htmlFor="title">Title</label>
+              <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleTitleChange} required />
+            </fieldset>
+            <fieldset className="form-group">
+              <label htmlFor="description">Description</label>
+              <textarea className="form-control" name="description" value={this.state.description} onChange={this.handleDescriptionChange} rows="3" required></textarea>
+            </fieldset>
+            <fieldset className="form-group">
+              <label htmlFor="file">Video</label>
+              <input className="form-control-file" type="file" value={this.state.video} onChange={this.handleVideoChange} accept="video/*" name="file" required /><br /><br />
+            </fieldset>
+            <div className="clearfix">
+              <input className="btn btn-primary-outline pull-right" type="submit" value="Upload" />
+            </div>
+          </form>
       )
     }
   }
