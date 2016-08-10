@@ -3,16 +3,19 @@ import { connect } from 'react-redux'
 import ZeroFrame from 'zeroframe'
 import { bindActionCreators } from 'redux'
 import * as videosActions from '../../videos/actions'
+import VideoCard from './videocard'
 
 class Home extends Component {
   constructor (props) {
     super(props)
 
+    console.log(props)
+
     this.state = {}
   }
 
   componentWillMount () {
-    ZeroFrame.cmd('dbQuery', ['SELECT * FROM video ORDER BY date_added'], (data) => {
+    ZeroFrame.cmd('dbQuery', ['SELECT * FROM video ORDER BY date_added LIMIT 5'], (data) => {
       console.log(data)
       this.props.actions.updateVideos(data)
     })
@@ -20,10 +23,20 @@ class Home extends Component {
 
   render () {
     let style = {
-      marginTop: '20%'
+      marginTop: '100px'
     }
     return (
-      <img style={style} src="public/img/zero_degrade.png" className="img-fluid m-x-auto d-block" ></img>
+      <div>
+        <img style={style} src="public/img/zero_degrade.png" className="img-fluid m-x-auto d-block" ></img>
+        <br />
+        <div className="row">
+          {this.props.videos.map((video, i) => {
+            console.log(video)
+            return <VideoCard video={video} webtorrent={this.props.webtorrent} />
+          })}
+        </div>
+      </div>
+
     )
   }
 };
@@ -31,7 +44,8 @@ class Home extends Component {
 function mapStateToProps (state) {
   return {
     site: state.site,
-    videos: state.videos
+    videos: state.videos,
+    webtorrent: state.webtorrent
   }
 }
 

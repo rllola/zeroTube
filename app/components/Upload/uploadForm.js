@@ -51,13 +51,12 @@ class UploadForm extends Component {
         let jsonRaw = unescape(encodeURIComponent(JSON.stringify(data, undefined, '\t')))
         ZeroFrame.cmd('fileWrite', [innerPath, window.btoa(jsonRaw)], (res) => {
           if (res === 'ok') {
-            this.setState({uploaded: true, magnetURI: torrent.magnetURI, name: '', description: ''})
+            this.setState({uploaded: true, magnetURI: torrent.magnetURI, title: '', description: ''})
             ZeroFrame.cmd('sitePublish', {'inner_path': innerPath}, (res) => {
               console.log(res)
             })
             ZeroFrame.cmd('dbQuery', ['SELECT * FROM video ORDER BY date_added'], (data) => {
-              console.log(data)
-              //this.props.actions.updateVideos(data)
+              this.props.actions.updateVideos(data)
             })
           } else {
             ZeroFrame.cmd('wrapperNotification', ['error', 'File write error:' + res])
@@ -93,23 +92,23 @@ class UploadForm extends Component {
         )
     } else {
       return (
-          <form onSubmit={this.handleSubmit}>
-            <fieldset className="form-group">
-              <label htmlFor="title">Title</label>
-              <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleTitleChange} required />
-            </fieldset>
-            <fieldset className="form-group">
-              <label htmlFor="description">Description</label>
-              <textarea className="form-control" name="description" value={this.state.description} onChange={this.handleDescriptionChange} rows="3" required></textarea>
-            </fieldset>
-            <fieldset className="form-group">
-              <label htmlFor="file">Video</label>
-              <input className="form-control-file" type="file" value={this.state.video} onChange={this.handleVideoChange} accept="video/*" name="file" required /><br /><br />
-            </fieldset>
-            <div className="clearfix">
-              <input className="btn btn-primary-outline pull-right" type="submit" value="Upload" />
-            </div>
-          </form>
+        <form onSubmit={this.handleSubmit}>
+          <fieldset className="form-group">
+            <label htmlFor="title">Title</label>
+            <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleTitleChange} required />
+          </fieldset>
+          <fieldset className="form-group">
+            <label htmlFor="description">Description</label>
+            <textarea className="form-control" name="description" value={this.state.description} onChange={this.handleDescriptionChange} rows="3" required></textarea>
+          </fieldset>
+          <fieldset className="form-group">
+            <label htmlFor="file">Video</label>
+            <input className="form-control-file" type="file" value={this.state.video} onChange={this.handleVideoChange} accept="video/*" name="file" required /><br /><br />
+          </fieldset>
+          <div className="clearfix">
+            <input className="btn btn-primary-outline pull-right" type="submit" value="Upload" />
+          </div>
+        </form>
       )
     }
   }

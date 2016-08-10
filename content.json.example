@@ -7,7 +7,7 @@
    "size": 250
   }
  },
- "ignore": "(data/.*|.git|node_modules|app|gulpfile.js|package.json|README.md|webpack.config.js)",
+ "ignore": "(data/.*|.git|node_modules|app|gulpfile.js|package.json|README.md|webpack.config.js|content.json.example)",
  "includes": {
   "data/users/content.json": {
    "signers": [],
