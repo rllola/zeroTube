@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class How extends Component {
-  render() {
+  render () {
     return (
       <article>
         <h1>How it works</h1>
@@ -9,8 +9,8 @@ class How extends Component {
           Some text here.
         </p>
       </article>
-    );
+    )
   }
-};
+}
 
-export default How;
+export default How

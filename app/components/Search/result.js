@@ -5,16 +5,25 @@ import { bindActionCreators } from 'redux'
 import * as videosActions from '../../videos/actions'
 import VideoCard from '../videocard'
 
-class Home extends Component {
+class Result extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {}
+    console.log(this.props.location.query.search)
+
+    this.state = {
+      videos: []
+    }
   }
 
-  componentWillMount () {
-    ZeroFrame.cmd('dbQuery', ['SELECT * FROM video ORDER BY date_added LIMIT 5'], (data) => {
-      this.props.actions.updateVideos(data)
+  componentDidMount () {
+    let cmd = 'dbQuery'
+    let query = "SELECT * FROM video WHERE title LIKE '%" + this.props.location.query.search + "%'"
+    ZeroFrame.cmd(cmd, [query], (data) => {
+      console.log(data)
+      this.setState({
+        videos: data
+      })
     })
   }
 
@@ -23,16 +32,11 @@ class Home extends Component {
       marginTop: '100px'
     }
     return (
-      <div>
-        <img style={style} src="public/img/zero_degrade.png" className="img-fluid m-x-auto d-block" ></img>
-        <br />
-        <div className="row">
-          {this.props.videos.map((video, i) => {
-            return <VideoCard video={video} webtorrent={this.props.webtorrent} />
-          })}
-        </div>
+      <div style={style} className="row">
+        {this.state.videos.map((video, i) => {
+          return <VideoCard video={video} webtorrent={this.props.webtorrent} />
+        })}
       </div>
-
     )
   }
 };
@@ -54,4 +58,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home)
+)(Result)

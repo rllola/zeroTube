@@ -1,19 +1,26 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
+import moment from 'moment'
 
 class VideoCard extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      poster: 'public/img/hex-loader2.gif'
+      poster: 'public/img/hex-loader2.gif',
+      peers: 0
     }
   }
 
-  componentWillMount () {
+  componentDidMount () {
     let torrent = this.props.webtorrent.client.get(this.props.video.video_id)
     if (!torrent) {
       this.props.webtorrent.client.add(this.props.video.magnet, (torrent) => {
-        console.log(torrent.numPeers)
+        torrent.pause()
+        this.setState({peers: torrent.numPeers})
+        torrent.on('wire', () => {
+          this.setState({peers: torrent.numPeers})
+        })
         torrent.on('done', () => {
           console.log('Done !')
           this.createPosterVideo('#' + torrent.infoHash + ' > video')
@@ -26,7 +33,6 @@ class VideoCard extends Component {
   }
 
   createPosterVideo (video, format) {
-
     if (typeof video === 'string') {
       video = document.querySelector(video)
     }
@@ -72,11 +78,13 @@ class VideoCard extends Component {
     return (
       <div className="col-md-4">
         <div style={style} className="card">
-          <img className="card-img-top img-fluid" width='318' height='180' src={this.state.poster} alt="Card image cap" />
+          <img className="card-img-top img-fluid" width="318" height="180" src={this.state.poster} alt="Card image cap" />
           <div className="card-block">
-            <h4 className="card-title">{this.props.video.title}</h4>
+            <h5 className="card-title">{this.props.video.title} <span className="tag tag-pill tag-info">{this.state.peers} peers</span>
+            </h5>
+            <small>{moment(this.props.video.date_added).fromNow()}</small>
             <p className="card-text">{this.props.video.description}</p>
-            <a href="#" className="btn btn-primary">Watch it</a>
+            <Link to={'/watch/' + this.props.video.video_id} className="pull-right">Watch it</Link>
           </div>
           <div style={none} id={this.props.video.video_id}></div>
         </div>
