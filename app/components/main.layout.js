@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import Constants from '../util/constants'
 import Login from './login'
+import ZeroFrame from 'zeroframe'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as videosActions from '../videos/actions'
 
 class MainLayout extends Component {
   constructor (props) {
@@ -17,8 +21,12 @@ class MainLayout extends Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    console.log(this.state.query)
-    this.context.router.push({pathname: '/search', query: {search: this.state.query}})
+    let cmd = 'dbQuery'
+    let query = "SELECT * FROM video WHERE title LIKE '%" + this.state.query + "%'"
+    ZeroFrame.cmd(cmd, [query], (data) => {
+      this.props.actions.updateVideos(data)
+      this.context.router.push({pathname: '/search'})
+    })
   }
 
   render () {
@@ -59,4 +67,19 @@ MainLayout.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-export default MainLayout
+function mapStateToProps (state) {
+  return {
+    videos: state.videos
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(videosActions, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainLayout)
