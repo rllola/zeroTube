@@ -80,10 +80,13 @@ class VideoCard extends Component {
         <div style={style} className="card">
           <img className="card-img-top img-fluid" width="318" height="180" src={this.state.poster} alt="Card image cap" />
           <div className="card-block">
-            <h5 className="card-title">{this.props.video.title} <span className="tag tag-pill tag-info">{this.state.peers} peers</span>
-            </h5>
-            <small>{moment(this.props.video.date_added).fromNow()}</small>
-            <p className="card-text">{this.props.video.description}</p>
+            <h5 className="card-title">{this.props.video.title}</h5>
+            <span className="tag tag-pill tag-info">{this.state.peers} peers</span><br />
+            <small>
+              added {moment(this.props.video.date_added).fromNow()} by <a href="#">{this.props.video.user_name}</a>
+          </small>
+          <br />
+            {/* <p className="card-text">{this.props.video.description}</p> */}
             <Link to={'/watch/' + this.props.video.video_id} className="pull-right">Watch it</Link>
           </div>
           <div style={none} id={this.props.video.video_id}></div>
