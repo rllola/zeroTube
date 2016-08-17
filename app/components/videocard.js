@@ -84,8 +84,8 @@ class VideoCard extends Component {
             <span className="tag tag-pill tag-info">{this.state.peers} peers</span><br />
             <small>
               added {moment(this.props.video.date_added).fromNow()} by <a href="#">{this.props.video.user_name}</a>
-          </small>
-          <br />
+            </small>
+            <br />
             {/* <p className="card-text">{this.props.video.description}</p> */}
             <Link to={'/watch/' + this.props.video.video_id} className="pull-right">Watch it</Link>
           </div>
