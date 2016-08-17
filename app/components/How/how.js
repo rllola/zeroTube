@@ -24,7 +24,7 @@ class How extends Component {
           <br />
           Like the project ? Then support Zeronet.<br /><br />
           You can also send Bitcoins to support ZeroTube dev : <br />
-        <a href="bitcoin:1DMjveQ9iRqT8ELnxPU2vRnFgCMGt6Y9EA">1DMjveQ9iRqT8ELnxPU2vRnFgCMGt6Y9EA</a>
+          <a href="bitcoin:1DMjveQ9iRqT8ELnxPU2vRnFgCMGt6Y9EA">1DMjveQ9iRqT8ELnxPU2vRnFgCMGt6Y9EA</a>
         </p>
       </article>
     )
