@@ -21,10 +21,10 @@ class VideoCard extends Component {
         torrent.on('wire', () => {
           this.setState({peers: torrent.numPeers})
         })
-        torrent.on('done', () => {
+        /* torrent.on('done', () => {
           console.log('Done !')
           this.createPosterVideo('#' + torrent.infoHash + ' > video')
-        })
+        }) */
         torrent.files[0].appendTo('#' + torrent.infoHash)
       })
     } else {
@@ -75,14 +75,6 @@ class VideoCard extends Component {
     let none = {
       display: 'none'
     }
-    let watchButton = {
-      position: 'absolute',
-      right: '1.25rem',
-      bottom: '1.25rem'
-    }
-    let wrapper = {
-      margin: '4rem'
-    }
     return (
       <div style={style} className="card">
         <img className="card-img-top img-fluid" src={this.state.poster} alt="Card image cap" />
@@ -92,10 +84,9 @@ class VideoCard extends Component {
             Added {moment(this.props.video.date_added).fromNow()} by <a href="#">{this.props.video.user_name}</a>
           </small>
           <br />
+          <br />
           <p className="card-text text-subtle">{this.props.video.description}</p>
-          <div style={wrapper} >
-            <Link style={watchButton} to={'/watch/' + this.props.video.video_id} type="button" className={'btn btn-outline-primary pull-right ' + (this.state.peers === 0 ? 'disabled' : null)}>Watch it ({this.state.peers} peers)</Link>
-          </div>
+          <Link to={'/watch/' + this.props.video.video_id} type="button" className={'btn btn-outline-primary pull-right ' + (this.state.peers === 0 ? 'disabled' : null)}>Watch it ({this.state.peers} peers)</Link>
         </div>
         <div style={none} id={this.props.video.video_id}></div>
       </div>

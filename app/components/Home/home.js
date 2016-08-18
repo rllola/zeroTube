@@ -29,7 +29,7 @@ class Home extends Component {
       <div>
         <img style={style} src="public/img/zero_degrade.png" className="img-fluid m-x-auto d-block" ></img>
         <br />
-        <div className="card-deck">
+        <div className="card-columns">
           {this.props.videos.map((video, i) => {
             return <VideoCard video={video} webtorrent={this.props.webtorrent} />
           })}
