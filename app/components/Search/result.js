@@ -7,6 +7,7 @@ class Result extends Component {
     let style = {
       marginTop: '100px'
     }
+    console.log(this.props.videos)
     if (this.props.videos.length === 0) {
       return (
         <h1 className="text-center text-muted">
