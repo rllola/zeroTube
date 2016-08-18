@@ -16,11 +16,12 @@ class VideoCard extends Component {
     let torrent = this.props.webtorrent.client.get(this.props.video.video_id)
     if (!torrent) {
       this.props.webtorrent.client.add(this.props.video.magnet, (torrent) => {
-        torrent.pause()
         this.setState({peers: torrent.numPeers})
         torrent.on('wire', () => {
           this.setState({peers: torrent.numPeers})
         })
+        let file = torrent.files[0]
+        file.deselect() // Stop downloading the file but still give information on peers
         torrent.on('download', function (bytes) {
           console.log('just downloaded: ' + bytes)
           console.log('total downloaded: ' + torrent.downloaded)
@@ -34,7 +35,11 @@ class VideoCard extends Component {
         torrent.files[0].appendTo('#' + torrent.infoHash) */
       })
     } else {
-      console.log('Get image')
+      console.log(torrent)
+      this.setState({peers: torrent.numPeers})
+      torrent.on('wire', () => {
+        this.setState({peers: torrent.numPeers})
+      })
     }
   }
 
@@ -81,6 +86,9 @@ class VideoCard extends Component {
     let none = {
       display: 'none'
     }
+    let wrapWord = {
+      wordWrap: 'break-word'
+    }
     return (
       <div style={style} className="card">
         <img className="card-img-top img-fluid" src={this.state.poster} alt="Card image cap" />
@@ -91,7 +99,7 @@ class VideoCard extends Component {
           </small>
           <br />
           <br />
-          <p className="card-text text-subtle">{this.props.video.description}</p>
+          <p style={wrapWord} className="card-text text-subtle">{this.props.video.description}</p>
           <Link to={'/watch/' + this.props.video.video_id} type="button" className={'btn btn-outline-primary pull-right ' + (this.state.peers === 0 ? 'disabled' : null)}>Watch it ({this.state.peers} peers)</Link>
         </div>
         <div style={none} id={this.props.video.video_id}></div>
