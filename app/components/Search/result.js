@@ -7,8 +7,15 @@ class Result extends Component {
     let style = {
       marginTop: '100px'
     }
+    if (this.props.videos.length === 0) {
+      return (
+        <h1 className="text-center text-muted">
+          No result found, sorry.
+        </h1>
+      )
+    }
     return (
-      <div style={style} className="card-deck">
+      <div style={style} className="card-columns">
         {this.props.videos.map((video, i) => {
           return <VideoCard video={video} webtorrent={this.props.webtorrent} />
         })}
