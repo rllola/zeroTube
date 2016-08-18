@@ -11,6 +11,7 @@ import How from './components/How/how'
 import Upload from './components/Upload/upload'
 import Watch from './components/Watch/watch'
 import Search from './components/Search/result'
+import Profile from './components/Profile/profile'
 
 export default (
   <Router history={browserHistory}>
@@ -20,6 +21,7 @@ export default (
       <Route path="/how" component={How} />
       <Route path="/watch/:torrentID" component={Watch} />
       <Route path="/search" component={Search} />
+      <Route path="/profile" component={Profile} />
       <Route from="*" to="{`/${Constants.APP_ID}`}" />
     </Route>
   </Router>
