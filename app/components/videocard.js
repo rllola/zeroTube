@@ -21,11 +21,17 @@ class VideoCard extends Component {
         torrent.on('wire', () => {
           this.setState({peers: torrent.numPeers})
         })
+        torrent.on('download', function (bytes) {
+          console.log('just downloaded: ' + bytes)
+          console.log('total downloaded: ' + torrent.downloaded)
+          console.log('download speed: ' + torrent.downloadSpeed)
+          console.log('progress: ' + torrent.progress)
+        })
         /* torrent.on('done', () => {
           console.log('Done !')
           this.createPosterVideo('#' + torrent.infoHash + ' > video')
-        }) */
-        torrent.files[0].appendTo('#' + torrent.infoHash)
+        })
+        torrent.files[0].appendTo('#' + torrent.infoHash) */
       })
     } else {
       console.log('Get image')
