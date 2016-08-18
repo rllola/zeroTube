@@ -8,7 +8,7 @@ class Result extends Component {
       marginTop: '100px'
     }
     return (
-      <div style={style} className="row">
+      <div style={style} className="card-deck">
         {this.props.videos.map((video, i) => {
           return <VideoCard video={video} webtorrent={this.props.webtorrent} />
         })}

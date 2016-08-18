@@ -75,22 +75,29 @@ class VideoCard extends Component {
     let none = {
       display: 'none'
     }
+    let watchButton = {
+      position: 'absolute',
+      right: '1.25rem',
+      bottom: '1.25rem'
+    }
+    let wrapper = {
+      margin: '4rem'
+    }
     return (
-      <div className="col-md-4">
-        <div style={style} className="card">
-          <img className="card-img-top img-fluid" width="318" height="180" src={this.state.poster} alt="Card image cap" />
-          <div className="card-block">
-            <h5 className="card-title">{this.props.video.title}</h5>
-            <span className="tag tag-pill tag-info">{this.state.peers} peers</span><br />
-            <small>
-              added {moment(this.props.video.date_added).fromNow()} by <a href="#">{this.props.video.user_name}</a>
-            </small>
-            <br />
-            {/* <p className="card-text">{this.props.video.description}</p> */}
-            <Link to={'/watch/' + this.props.video.video_id} className="pull-right">Watch it</Link>
+      <div style={style} className="card">
+        <img className="card-img-top img-fluid" src={this.state.poster} alt="Card image cap" />
+        <div className="card-block">
+          <h5 className="card-title">{this.props.video.title}</h5>
+          <small className="text-muted">
+            Added {moment(this.props.video.date_added).fromNow()} by <a href="#">{this.props.video.user_name}</a>
+          </small>
+          <br />
+          <p className="card-text text-subtle">{this.props.video.description}</p>
+          <div style={wrapper} >
+            <Link style={watchButton} to={'/watch/' + this.props.video.video_id} type="button" className={'btn btn-outline-primary pull-right ' + (this.state.peers === 0 ? 'disabled' : null)}>Watch it ({this.state.peers} peers)</Link>
           </div>
-          <div style={none} id={this.props.video.video_id}></div>
         </div>
+        <div style={none} id={this.props.video.video_id}></div>
       </div>
     )
   }
