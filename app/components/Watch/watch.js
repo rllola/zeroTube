@@ -16,6 +16,7 @@ class Watch extends Component {
     let cmd = 'dbQuery'
     let query = 'SELECT * FROM video WHERE video_id="' + this.props.params.torrentID + '"'
     ZeroFrame.cmd(cmd, [query], (data) => {
+      console.log(data)
       this.setState({video: data[0]})
       let torrent = this.props.webtorrent.client.get(data[0].video_id)
       if (!torrent) {
@@ -24,11 +25,19 @@ class Watch extends Component {
           torrent.on('done', () => {
             console.log('Done !')
           })
-          torrent.files[0].appendTo('#' + torrent.infoHash)
+          torrent.files[0].appendTo('#video')
         })
       } else {
         console.log('torrent already addded')
-        torrent.files[0].appendTo('#' + torrent.infoHash)
+        console.log(torrent)
+        /* torrent.on('download', function (bytes) {
+          console.log('just downloaded: ' + bytes)
+          console.log('total downloaded: ' + torrent.downloaded)
+          console.log('download speed: ' + torrent.downloadSpeed)
+          console.log('progress: ' + torrent.progress)
+        }) */
+        torrent.critical()
+        torrent.files[0].appendTo('#video')
       }
     })
   }
@@ -36,7 +45,7 @@ class Watch extends Component {
   render () {
     return (
       <div>
-        <div id={this.state.video.video_id} className="row"></div>
+        <div id="video" className="row"></div>
         <h1>{this.state.video.title}</h1>
         <p>{this.state.video.description}</p>
       </div>
