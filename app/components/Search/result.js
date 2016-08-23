@@ -7,7 +7,6 @@ class Result extends Component {
     let style = {
       marginTop: '100px'
     }
-    console.log(this.props.videos)
     if (this.props.videos.length === 0) {
       return (
         <h1 className="text-center text-muted">
@@ -16,10 +15,12 @@ class Result extends Component {
       )
     }
     return (
-      <div style={style} className="card-columns">
-        {this.props.videos.map((video, i) => {
-          return <VideoCard video={video} webtorrent={this.props.webtorrent} />
-        })}
+      <div>
+        <div style={style} className="card-columns">
+          {this.props.videos.map((video, i) => {
+            return <VideoCard video={video} webtorrent={this.props.webtorrent} />
+          })}
+        </div>
       </div>
     )
   }

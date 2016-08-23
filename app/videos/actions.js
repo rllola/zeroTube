@@ -6,3 +6,10 @@ export function updateVideos (videos) {
     videos
   }
 }
+
+export function loadMore (videos) {
+  return {
+    type: types.LOAD_MORE,
+    videos
+  }
+}

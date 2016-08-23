@@ -24,7 +24,6 @@ class Navbar extends Component {
     let cmd = 'dbQuery'
     let query = "SELECT video.*, user.value AS user_name, user_json_content.directory AS user_address FROM video LEFT JOIN json AS user_json_data ON (user_json_data.json_id = video.json_id) LEFT JOIN json AS user_json_content ON (user_json_content.directory = user_json_data.directory AND user_json_content.file_name = 'content.json') LEFT JOIN keyvalue AS user ON (user.json_id = user_json_content.json_id AND user.key = 'cert_user_id') WHERE title LIKE '%" + this.state.query + "%' OR description LIKE '%" + this.state.query + "'"
     ZeroFrame.cmd(cmd, [query], (data) => {
-      console.log(data)
       this.props.actions.updateVideos(data)
       this.context.router.push({pathname: '/search'})
     })

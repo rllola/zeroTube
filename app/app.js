@@ -21,7 +21,7 @@ ZeroFrame.cmd('siteInfo', {}, (info) => {
 //  Now we can attach the router to the 'root' element like this:
 render(
   <Provider store={store}>
-    {Router}
+    {Router(store)}
   </Provider>,
   document.getElementById('root')
 )
