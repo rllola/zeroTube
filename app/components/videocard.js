@@ -29,7 +29,6 @@ class VideoCard extends Component {
         torrent.files[0].appendTo('#' + torrent.infoHash) */
       })
     } else {
-      console.log(torrent)
       this.setState({peers: torrent.numPeers})
       torrent.on('wire', () => {
         this.setState({peers: torrent.numPeers})

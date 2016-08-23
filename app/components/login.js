@@ -19,7 +19,7 @@ class Login extends Component {
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{this.props.site.cert_user_id}</a>
           <div className="dropdown-menu">
-            <Link className="dropdown-item" to="/profile">Profile</Link>
+            <Link className="dropdown-item" to={'/profile/' + this.props.site.cert_user_id}>Profile</Link>
             <a className="dropdown-item disabled" href="#">Settings</a>
             <div className="dropdown-divider"></div>
             <a className="dropdown-item" href="#" onClick={this.handleClick}>Logout</a>
