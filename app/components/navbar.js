@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Constants from '../util/constants'
 import Login from './login'
-import ZeroFrame from 'zeroframe'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
