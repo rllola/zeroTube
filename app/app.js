@@ -3,7 +3,8 @@ import ZeroFrame from 'zeroframe'
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 //  import LocalStorage from './util/localstorage.js'
 import { updateInfo } from './site/actions'
 
@@ -11,7 +12,7 @@ import Router from './router'
 import rootReducer from './reducers'
 
 //  Create store
-let store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 //  Update store with data site info.
 ZeroFrame.cmd('siteInfo', {}, (info) => {

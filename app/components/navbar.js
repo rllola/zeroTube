@@ -21,12 +21,10 @@ class Navbar extends Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    let cmd = 'dbQuery'
-    let query = "SELECT video.*, user.value AS user_name, user_json_content.directory AS user_address FROM video LEFT JOIN json AS user_json_data ON (user_json_data.json_id = video.json_id) LEFT JOIN json AS user_json_content ON (user_json_content.directory = user_json_data.directory AND user_json_content.file_name = 'content.json') LEFT JOIN keyvalue AS user ON (user.json_id = user_json_content.json_id AND user.key = 'cert_user_id') WHERE title LIKE '%" + this.state.query + "%' OR description LIKE '%" + this.state.query + "'"
-    ZeroFrame.cmd(cmd, [query], (data) => {
-      this.props.actions.updateVideos(data)
+    if (this.state.query) {
+      this.props.actions.searchVideos(this.state.query)
       this.context.router.push({pathname: '/search'})
-    })
+    }
   }
 
   render () {
@@ -35,7 +33,7 @@ class Navbar extends Component {
     }
     return (
       <nav className="navbar navbar-light bg-faded">
-        <Link to={`${Constants.APP_ID}`} className="navbar-brand col-xs-1"><img src="public/img/zerotube-logo.svg" height="35" /></Link>
+        <Link to={`${Constants.APP_ID}`} className="navbar-brand col-xs-1" ><img src="public/img/zerotube-logo.svg" height="35" /></Link>
         <div>
           <form className="form-inline" name="searchForm" onSubmit={this.handleSubmit} >
             <input className="form-control" value={this.state.query} onChange={this.handleQueryChange} type="text" name="query" placeholder="Search" />

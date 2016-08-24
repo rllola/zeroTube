@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as videosActions from '../../videos/actions'
-import ZeroFrame from 'zeroframe'
 import VideoCard from '../videocard'
 
 class Profile extends Component {
@@ -10,17 +9,12 @@ class Profile extends Component {
     super(props)
 
     this.state = {
-      mine: true
+      mine: (this.props.params.zeroID === this.props.site.cert_user_id)
     }
   }
 
   componentWillMount () {
-    let cmd = 'dbQuery'
-    let query = "SELECT video.*, user.value AS user_name, user_json_content.directory AS user_address FROM video LEFT JOIN json AS user_json_data ON (user_json_data.json_id = video.json_id) LEFT JOIN json AS user_json_content ON (user_json_content.directory = user_json_data.directory AND user_json_content.file_name = 'content.json') LEFT JOIN keyvalue AS user ON (user.json_id = user_json_content.json_id AND user.key = 'cert_user_id') WHERE user_name = '" + this.props.params.zeroID + "' ORDER BY date_added DESC"
-    ZeroFrame.cmd(cmd, [query], (data) => {
-      console.log(data)
-      this.props.actions.updateVideos(data)
-    })
+    this.props.actions.getVideosByUser(this.props.params.zeroID)
   }
 
   render () {

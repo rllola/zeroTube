@@ -6,6 +6,10 @@ import VideoCard from '../videocard'
 import LoadMore from '../loadMore'
 
 class Home extends Component {
+  componentWillMount () {
+    this.props.actions.latestVideos()
+  }
+
   render () {
     let style = {
       marginTop: '100px'
