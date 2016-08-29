@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Success from './success'
+import Feedback from './feedback'
 import { connect } from 'react-redux'
 import ZeroFrame from 'zeroframe'
 import { bindActionCreators } from 'redux'
@@ -14,7 +14,9 @@ class UploadForm extends Component {
     this.handleVideoChange = this.handleVideoChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
-    this.state = {}
+    this.state = {
+      status: 'none'
+    }
   }
 
   handleTitleChange (e) {
@@ -31,6 +33,7 @@ class UploadForm extends Component {
 
   handleSubmit (e) {
     e.preventDefault()
+    this.setState({status: 'is_uploading'})
     let innerPath = 'data/users/' + this.props.site.auth_address + '/data.json'
     let video = this.state.video
     this.props.webtorrent.client.seed(video, (torrent) => {
@@ -51,15 +54,12 @@ class UploadForm extends Component {
         let jsonRaw = unescape(encodeURIComponent(JSON.stringify(data, undefined, '\t')))
         ZeroFrame.cmd('fileWrite', [innerPath, window.btoa(jsonRaw)], (res) => {
           if (res === 'ok') {
-            this.setState({uploaded: true, magnetURI: torrent.magnetURI, title: '', description: ''})
             ZeroFrame.cmd('sitePublish', {'inner_path': innerPath}, (res) => {
-              console.log(res)
-            })
-            ZeroFrame.cmd('dbQuery', ['SELECT * FROM video ORDER BY date_added'], (data) => {
-              this.props.actions.updateVideos(data)
+              this.setState({status: 'is_uploaded', magnetURI: torrent.magnetURI, torrentFile: torrent.torrentFile})
             })
           } else {
             ZeroFrame.cmd('wrapperNotification', ['error', 'File write error:' + res])
+            this.setState({status: 'error'})
           }
         })
       })
@@ -67,32 +67,10 @@ class UploadForm extends Component {
   }
 
   render () {
-    if (this.state.uploaded) {
-      return (
-        <div>
-          <Success magnetURI={this.state.magnetURI} />
-          <form onSubmit={this.handleSubmit}>
-            <fieldset className="form-group">
-              <label htmlFor="title">Title</label>
-              <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleTitleChange} required />
-            </fieldset>
-            <fieldset className="form-group">
-              <label htmlFor="description">Description</label>
-              <textarea className="form-control" name="description" value={this.state.description} onChange={this.handleDescriptionChange} rows="3" required></textarea>
-            </fieldset>
-            <fieldset className="form-group">
-              <label htmlFor="file">Video</label>
-              <input className="form-control-file" type="file" value={this.state.video} onChange={this.handleVideoChange} accept="video/*" name="file" required /><br /><br />
-            </fieldset>
-            <div className="clearfix">
-              <input className="btn btn-primary-outline pull-right" type="submit" value="Upload" />
-            </div>
-          </form>
-        </div>
-        )
-    } else {
-      return (
-        <form onSubmit={this.handleSubmit}>
+    return (
+      <div>
+        <Feedback status={this.state.status} magnetURI={this.state.magnetURI} torrentFile={this.state.torrentFile} />
+        <form id="uploadForm" onSubmit={this.handleSubmit}>
           <fieldset className="form-group">
             <label htmlFor="title">Title</label>
             <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleTitleChange} required />
@@ -106,13 +84,13 @@ class UploadForm extends Component {
             <input className="form-control-file" type="file" value={this.state.video} onChange={this.handleVideoChange} accept="video/*" name="file" required /><br /><br />
           </fieldset>
           <div className="clearfix">
-            <input className="btn btn-primary-outline pull-right" type="submit" value="Upload" />
+            <button className={'btn btn-outline-primary pull-right ' + (this.state.status === 'is_uploading' ? 'disabled' : null)} type="submit" >Upload</button>
           </div>
         </form>
-      )
-    }
+      </div>
+    )
   }
-};
+}
 
 function mapStateToProps (state) {
   return {

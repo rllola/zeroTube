@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import path from 'path'
 
 class Success extends Component {
   constructor (props) {
@@ -11,9 +12,10 @@ class Success extends Component {
 
   render () {
     return (
-      <div className="alert alert-info" role="alert">
+      <div className="alert alert-success" role="alert">
         <strong>Success !</strong> Your video has been added successfully ! Add the link below to your Webtorrent Desktop !<br />
-        <a className="nav-link" href="#">{this.props.magnetURI}</a>
+        <a className="nav-link" target="_blank" href={this.props.magnetURI}>[ Magnet URI ] </a> <br/>
+        <input className="form-control" type="text" value={this.props.magnetURI} />
       </div>
     )
   }

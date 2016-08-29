@@ -18,6 +18,7 @@ Because I can.
 - [x] "How it works ?" page
 - [ ] Swagger home page needed
 - [ ] Profile page
+- [ ] Write test and stop breaking things
 
 And that would be nice to have that so far...
 

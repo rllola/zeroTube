@@ -26,7 +26,6 @@ class Home extends Component {
         </div>
         {(this.props.site.total_video > this.props.videos.length) ? <LoadMore length={this.props.videos.length} /> : null}
       </div>
-
     )
   }
 }

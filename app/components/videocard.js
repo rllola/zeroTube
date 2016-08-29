@@ -80,6 +80,7 @@ class VideoCard extends Component {
 
   handleDelete () {
     let innerPath = 'data/users/' + this.props.authAddress + '/data.json'
+    this.props.webtorrent.client.remove(this.props.video.video_id)
     ZeroFrame.cmd('fileGet', {'inner_path': innerPath, 'required': false}, (data) => {
       if (data) {
         data = JSON.parse(data)
@@ -95,7 +96,6 @@ class VideoCard extends Component {
             console.log(res)
             this.props.actions.getVideosByUser(this.props.video.user_name)
           })
-
         } else {
           ZeroFrame.cmd('wrapperNotification', ['error', 'File write error:' + res])
         }
@@ -124,7 +124,7 @@ class VideoCard extends Component {
           <br />
           <br />
           <p style={wrapWord} className="card-text text-subtle">{this.props.video.description}</p>
-          { this.props.mine ? <button onClick={this.handleDelete} type="button" className="btn btn-outline-danger" >Delete</button> : null }
+          {this.props.mine ? <button onClick={this.handleDelete} type="button" className="btn btn-outline-danger" >Delete</button> : null}
           <Link to={'/watch/' + this.props.video.video_id} type="button" className={'btn btn-outline-primary pull-right ' + (this.state.peers === 0 ? 'disabled' : null)}>Watch it ({this.state.peers} peers)</Link>
         </div>
         <div style={none} id={this.props.video.video_id}></div>
