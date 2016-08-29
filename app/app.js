@@ -16,7 +16,11 @@ const store = createStore(rootReducer, applyMiddleware(thunk))
 
 //  Update store with data site info.
 ZeroFrame.cmd('siteInfo', {}, (info) => {
-  store.dispatch(updateInfo(info))
+  //  Get total number of Video
+  ZeroFrame.cmd('dbQuery', ['SELECT COUNT(*) AS total FROM video'], (totalVideo) => {
+    Object.assign(info, {'total_video': totalVideo[0].total})
+    store.dispatch(updateInfo(info))
+  })
 })
 
 //  Now we can attach the router to the 'root' element like this:

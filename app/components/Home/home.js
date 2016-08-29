@@ -24,7 +24,7 @@ class Home extends Component {
             return <VideoCard video={video} webtorrent={this.props.webtorrent} />
           })}
         </div>
-        <LoadMore length={this.props.videos.length} />
+        {(this.props.site.total_video > this.props.videos.length) ? <LoadMore length={this.props.videos.length} /> : null}
       </div>
 
     )
