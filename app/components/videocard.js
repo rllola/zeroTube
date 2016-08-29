@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
+import ZeroFrame from 'zeroframe'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as videosActions from '../videos/actions'
 
 class VideoCard extends Component {
   constructor (props) {
     super(props)
+
+    this.handleDelete = this.handleDelete.bind(this)
 
     this.state = {
       poster: 'public/img/no-preview.jpg',
@@ -72,6 +78,31 @@ class VideoCard extends Component {
     this.setState({poster: 'data:image/png;base64,' + data})
   }
 
+  handleDelete () {
+    let innerPath = 'data/users/' + this.props.authAddress + '/data.json'
+    ZeroFrame.cmd('fileGet', {'inner_path': innerPath, 'required': false}, (data) => {
+      if (data) {
+        data = JSON.parse(data)
+      } else {
+        data = { 'video': [] }
+      }
+      let index = data.video.map((element) => { return element.video_id }).indexOf(this.props.video.video_id)
+      data.video.splice(index, 1)
+      let jsonRaw = unescape(encodeURIComponent(JSON.stringify(data, undefined, '\t')))
+      ZeroFrame.cmd('fileWrite', [innerPath, window.btoa(jsonRaw)], (res) => {
+        if (res === 'ok') {
+          ZeroFrame.cmd('sitePublish', {'inner_path': innerPath}, (res) => {
+            console.log(res)
+            this.props.actions.getVideosByUser(this.props.video.user_name)
+          })
+
+        } else {
+          ZeroFrame.cmd('wrapperNotification', ['error', 'File write error:' + res])
+        }
+      })
+    })
+  }
+
   render () {
     let style = {
       maxWidth: '20rem'
@@ -93,6 +124,7 @@ class VideoCard extends Component {
           <br />
           <br />
           <p style={wrapWord} className="card-text text-subtle">{this.props.video.description}</p>
+          { this.props.mine ? <button onClick={this.handleDelete} type="button" className="btn btn-outline-danger" >Delete</button> : null }
           <Link to={'/watch/' + this.props.video.video_id} type="button" className={'btn btn-outline-primary pull-right ' + (this.state.peers === 0 ? 'disabled' : null)}>Watch it ({this.state.peers} peers)</Link>
         </div>
         <div style={none} id={this.props.video.video_id}></div>
@@ -101,4 +133,19 @@ class VideoCard extends Component {
   }
 };
 
-export default VideoCard
+function mapStateToProps (state) {
+  return {
+    videos: state.videos
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(videosActions, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VideoCard)

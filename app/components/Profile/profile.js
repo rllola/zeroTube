@@ -26,7 +26,7 @@ class Profile extends Component {
         <h2>Channel</h2>
         <div className="card-columns">
           {this.props.videos.map((video, i) => {
-            return <VideoCard video={video} webtorrent={this.props.webtorrent} />
+            return <VideoCard video={video} mine={this.state.mine} authAddress={this.props.site.auth_address} webtorrent={this.props.webtorrent} />
           })}
         </div>
       </div>
