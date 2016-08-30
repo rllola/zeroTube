@@ -10,7 +10,8 @@ class Error extends Component {
   render () {
     return (
       <div className="alert alert-danger" role="alert">
-        <strong>Shoo !</strong> Something bad happened. Seeding not happening, sorry.
+        <strong>Shoo !</strong> Something bad happened. Seeding not happening, sorry. <br />
+        {this.props.message}
       </div>
     )
   }

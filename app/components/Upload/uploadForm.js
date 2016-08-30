@@ -13,6 +13,8 @@ class UploadForm extends Component {
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
     this.handleVideoChange = this.handleVideoChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.startSeeding = this.startSeeding.bind(this)
+    this.onSeed = this.onSeed.bind(this)
 
     this.state = {
       status: 'none'
@@ -34,46 +36,76 @@ class UploadForm extends Component {
   handleSubmit (e) {
     e.preventDefault()
     this.setState({status: 'is_uploading'})
-    let innerPath = 'data/users/' + this.props.site.auth_address + '/data.json'
-    let video = this.state.video
+    this.startSeeding()
+  }
+
+  startSeeding () {
     this.props.webtorrent.client.on('error', (err) => {
-      console.log('Shit something has gone wrong: ', err)
-      this.setState({status: 'error'})
-    })
-    this.props.webtorrent.client.seed(video, (torrent) => {
-      console.log('Client is seeding:', torrent.infoHash)
-      ZeroFrame.cmd('fileGet', {'inner_path': innerPath, 'required': false}, (data) => {
-        if (data) {
-          data = JSON.parse(data)
-        } else {
-          data = { 'video': [] }
-        }
-        data.video.push({
-          'video_id': torrent.infoHash,
-          'title': this.state.title,
-          'description': this.state.description,
-          'magnet': torrent.magnetURI,
-          'date_added': new Date()
-        })
-        let jsonRaw = unescape(encodeURIComponent(JSON.stringify(data, undefined, '\t')))
-        ZeroFrame.cmd('fileWrite', [innerPath, window.btoa(jsonRaw)], (res) => {
-          if (res === 'ok') {
-            ZeroFrame.cmd('sitePublish', {'inner_path': innerPath}, (res) => {
-              this.setState({status: 'is_uploaded', magnetURI: torrent.magnetURI})
-            })
+      if (err.message.search('Cannot add duplicate torrent') !== -1) {
+        console.log('Warning this torrent is already in the client')
+        let torrentID = err.message.split(' ')[4]
+        this.props.webtorrent.client.remove(torrentID, (err) => {
+          if (!err) {
+            this.startSeeding()
           } else {
-            ZeroFrame.cmd('wrapperNotification', ['error', 'File write error:' + res])
-            this.setState({status: 'error'})
+            this.setStet({status: 'error', message: err})
           }
         })
-      })
+      } else {
+        this.setState({status: 'error', message: err})
+      }
+    })
+    this.props.webtorrent.client.seed(this.state.video, this.onSeed)
+  }
+
+  onSeed (torrent) {
+    let innerPath = 'data/users/' + this.props.site.auth_address + '/data.json'
+    console.log('Client is seeding:', torrent.infoHash)
+    /* Verify if video already uploaded by user */
+    let query = 'SELECT video.*, user.value AS user_name, user_json_content.directory AS user_address ' +
+    'FROM video ' +
+    'LEFT JOIN json AS user_json_data ON (user_json_data.json_id = video.json_id) ' +
+    "LEFT JOIN json AS user_json_content ON (user_json_content.directory = user_json_data.directory AND user_json_content.file_name = 'content.json') " +
+    'LEFT JOIN keyvalue AS user ON (user.json_id = user_json_content.json_id AND user.key = "cert_user_id") ' +
+    'WHERE user_name = "' + this.props.site.cert_user_id + '" AND video.video_id = "' + torrent.infoHash + '"'
+    ZeroFrame.cmd('dbQuery', [query], (data) => {
+      console.log(data)
+      if (!data.length) {
+        ZeroFrame.cmd('fileGet', {'inner_path': innerPath, 'required': false}, (data) => {
+          if (data) {
+            data = JSON.parse(data)
+          } else {
+            data = { 'video': [] }
+          }
+          data.video.push({
+            'video_id': torrent.infoHash,
+            'title': this.state.title,
+            'description': this.state.description,
+            'magnet': torrent.magnetURI,
+            'date_added': new Date()
+          })
+          let jsonRaw = unescape(encodeURIComponent(JSON.stringify(data, undefined, '\t')))
+          ZeroFrame.cmd('fileWrite', [innerPath, window.btoa(jsonRaw)], (res) => {
+            if (res === 'ok') {
+              ZeroFrame.cmd('sitePublish', {'inner_path': innerPath}, (res) => {
+                this.setState({status: 'is_uploaded', magnetURI: torrent.magnetURI})
+              })
+            } else {
+              ZeroFrame.cmd('wrapperNotification', ['error', 'File write error:' + res])
+              this.setState({status: 'error', message: res})
+            }
+          })
+        })
+      } else {
+        this.setState({status: 'warning'})
+      }
     })
   }
 
   render () {
     return (
       <div>
-        <Feedback status={this.state.status} magnetURI={this.state.magnetURI} />
+        <Feedback status={this.state.status} message={this.state.message} magnetURI={this.state.magnetURI} />
         <form id="uploadForm" onSubmit={this.handleSubmit}>
           <fieldset className="form-group">
             <label htmlFor="title">Title</label>

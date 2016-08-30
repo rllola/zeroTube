@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Success from './success'
 import Error from './error'
+import Warning from './warning'
 
 class Feedback extends Component {
   constructor (props) {
@@ -16,7 +17,9 @@ class Feedback extends Component {
       case 'is_uploaded':
         return <Success magnetURI={this.props.magnetURI} />
       case 'error':
-        return <Error />
+        return <Error message={this.props.message} />
+      case 'warning':
+        return <Warning />
       default:
         return null
     }
