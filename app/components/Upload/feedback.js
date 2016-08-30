@@ -6,8 +6,6 @@ class Feedback extends Component {
   constructor (props) {
     super(props)
 
-    console.log(props)
-
     this.state = {}
   }
 
@@ -16,7 +14,7 @@ class Feedback extends Component {
       case 'is_uploading':
         return <div className="alert alert-info" role="alert">Preparing torrent... Please wait.</div>
       case 'is_uploaded':
-        return <Success magnetURI={this.props.magnetURI} torrentFile={this.props.torrentFile} />
+        return <Success magnetURI={this.props.magnetURI} />
       case 'error':
         return <Error />
       default:

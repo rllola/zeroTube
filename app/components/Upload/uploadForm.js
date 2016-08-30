@@ -55,7 +55,7 @@ class UploadForm extends Component {
         ZeroFrame.cmd('fileWrite', [innerPath, window.btoa(jsonRaw)], (res) => {
           if (res === 'ok') {
             ZeroFrame.cmd('sitePublish', {'inner_path': innerPath}, (res) => {
-              this.setState({status: 'is_uploaded', magnetURI: torrent.magnetURI, torrentFile: torrent.torrentFile})
+              this.setState({status: 'is_uploaded', magnetURI: torrent.magnetURI})
             })
           } else {
             ZeroFrame.cmd('wrapperNotification', ['error', 'File write error:' + res])
@@ -69,7 +69,7 @@ class UploadForm extends Component {
   render () {
     return (
       <div>
-        <Feedback status={this.state.status} magnetURI={this.state.magnetURI} torrentFile={this.state.torrentFile} />
+        <Feedback status={this.state.status} magnetURI={this.state.magnetURI} />
         <form id="uploadForm" onSubmit={this.handleSubmit}>
           <fieldset className="form-group">
             <label htmlFor="title">Title</label>

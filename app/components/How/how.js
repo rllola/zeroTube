@@ -12,18 +12,23 @@ class How extends Component {
           <br />
           It use webtorrent to download and seed the videos. More information on the project <a href="https://webtorrent.io/">here</a>.
           <br />
-          Warining ! It use Webrtc and make your IP vunerable even with a VPN.
+          Warning ! It use Webrtc and make your IP vunerable even with a VPN.
           <br />
           <br />
           With ZeroTube, you can look for videos or add one. If you add one please think of adding it to your <a href="https://webtorrent.io/desktop">webtorrent desktop</a> and keep it open.
           You can then seed the videos even if your zeronet app is not running and you can check how many people is viewing/seeding your video.
           <br />
           <br />
-          I will soon start a feature that will let you choose an external seeder in exchange of some bitcoins.
+          I will soon start a feature that will let you choose an external seeder in exchange of some bitcoins. (This actually might take more time...)
+          <br />
+          <br />
+          <img src="public/img/firefox_logo.png" width="40px" className="img-fluid" ></img>
+          <strong>Recommendation :</strong> Better use Firefox for ZeroTube
           <br />
           <br />
           Like the project ? Then support Zeronet.<br /><br />
           You can also send Bitcoins to support ZeroTube dev : <br />
+          <img src="public/img/qrcode.png" > </img>
           <a href="bitcoin:1DMjveQ9iRqT8ELnxPU2vRnFgCMGt6Y9EA">1DMjveQ9iRqT8ELnxPU2vRnFgCMGt6Y9EA</a>
         </p>
       </article>
