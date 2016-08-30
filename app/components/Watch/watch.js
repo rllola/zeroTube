@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ZeroFrame from 'zeroframe'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import { Link } from 'react-router'
 
 class Watch extends Component {
   constructor (props) {
@@ -47,7 +48,7 @@ class Watch extends Component {
         <div id="video" className="row"></div>
         <h1>{this.state.video.title}</h1>
         <small className="text-muted">
-          Added {moment(this.state.video.date_added).fromNow()} by <a href="#">{this.state.video.user_name}</a>
+          Added {moment(this.state.video.date_added).fromNow()} by <Link to={'/profile/' + this.state.video.user_name}>{this.state.video.user_name}</Link>
         </small>
         <div className="alert alert-info" role="alert">
           <a className="nav-link" target="_blank" href={this.state.video.magnet}>Magnet URI</a> <br />

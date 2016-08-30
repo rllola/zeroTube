@@ -118,7 +118,7 @@ class VideoCard extends Component {
         <div className="card-block">
           <h5 className="card-title">{this.props.video.title}</h5>
           <small className="text-muted">
-            Added {moment(this.props.video.date_added).fromNow()} by <a href="#">{this.props.video.user_name}</a>
+            Added {moment(this.props.video.date_added).fromNow()} by <Link to={'/profile/' + this.props.video.user_name}>{this.props.video.user_name}</Link>
           </small>
           <br />
           <br />
