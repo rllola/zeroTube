@@ -26,7 +26,7 @@ export function searchVideos (search) {
   'LEFT JOIN json AS user_json_data ON (user_json_data.json_id = video.json_id) ' +
   "LEFT JOIN json AS user_json_content ON (user_json_content.directory = user_json_data.directory AND user_json_content.file_name = 'content.json') " +
   "LEFT JOIN keyvalue AS user ON (user.json_id = user_json_content.json_id AND user.key = 'cert_user_id') " +
-  "WHERE title LIKE '%" + search + "%' OR description LIKE '%" + search + "'" +
+  "WHERE title LIKE '%" + search + "%' OR description LIKE '%" + search + "%'" +
   'ORDER BY date_added DESC LIMIT 5'
   return (dispatch) => {
     ZeroFrame.cmd(cmd, [query], (data) => {
