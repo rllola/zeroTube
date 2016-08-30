@@ -36,6 +36,10 @@ class UploadForm extends Component {
     this.setState({status: 'is_uploading'})
     let innerPath = 'data/users/' + this.props.site.auth_address + '/data.json'
     let video = this.state.video
+    this.props.webtorrent.client.on('error', (err) => {
+      console.log('Shit something has gone wrong: ', err)
+      this.setState({status: 'error'})
+    })
     this.props.webtorrent.client.seed(video, (torrent) => {
       console.log('Client is seeding:', torrent.infoHash)
       ZeroFrame.cmd('fileGet', {'inner_path': innerPath, 'required': false}, (data) => {
