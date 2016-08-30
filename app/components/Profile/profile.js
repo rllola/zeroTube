@@ -21,7 +21,7 @@ class Profile extends Component {
     return (
       <div>
         <h1>Profile page</h1>
-        <p>{this.props.site.cert_user_id}</p>
+        <p>{this.props.params.zeroID}</p>
         <br />
         <h2>Channel</h2>
         <div className="card-columns">
