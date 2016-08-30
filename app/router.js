@@ -25,7 +25,7 @@ export default (store) => {
         <IndexRoute component={Home} onEnter={getLatestVideos(store)} />
         <Route path="/upload" component={Upload} />
         <Route path="/how" component={How} />
-        <Route path="/watch/:torrentID" component={Watch} />
+        <Route path="/watch/:json/:torrentID" component={Watch} />
         <Route path="/search" component={Search} />
         <Route path="/profile/:zeroID" component={Profile} />
         <Route from="*" to="{`/${Constants.APP_ID}`}" />

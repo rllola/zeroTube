@@ -6,6 +6,8 @@ class Watch extends Component {
   constructor (props) {
     super(props)
 
+    console.log(props)
+
     this.state = {
       video: {}
     }
@@ -13,14 +15,12 @@ class Watch extends Component {
 
   componentDidMount () {
     let cmd = 'dbQuery'
-    let query = 'SELECT * FROM video WHERE video_id="' + this.props.params.torrentID + '"'
+    let query = 'SELECT * FROM video WHERE video_id="' + this.props.params.torrentID + '" AND json_id="' + this.props.params.json + '"'
     ZeroFrame.cmd(cmd, [query], (data) => {
-      console.log(data)
       this.setState({video: data[0]})
       let torrent = this.props.webtorrent.client.get(data[0].video_id)
       if (!torrent) {
         this.props.webtorrent.client.add(data[0].magnet, (torrent) => {
-          console.log(torrent.numPeers)
           torrent.on('done', () => {
             console.log('Done !')
           })
@@ -28,7 +28,6 @@ class Watch extends Component {
         })
       } else {
         console.log('torrent already addded')
-        console.log(torrent)
         /* torrent.on('download', function (bytes) {
           console.log('just downloaded: ' + bytes)
           console.log('total downloaded: ' + torrent.downloaded)
