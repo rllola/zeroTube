@@ -116,7 +116,7 @@ class UploadForm extends Component {
             <textarea className="form-control" name="description" value={this.state.description} onChange={this.handleDescriptionChange} rows="3" required></textarea>
           </fieldset>
           <fieldset className="form-group">
-            <label htmlFor="file">Video</label>
+            <label htmlFor="file">Video <small className="text-muted">( .mkv extension not supported, prefered .mp4)</small></label>
             <input className="form-control-file" type="file" value={this.state.video} onChange={this.handleVideoChange} accept="video/*" name="file" required /><br /><br />
           </fieldset>
           <div className="clearfix">
