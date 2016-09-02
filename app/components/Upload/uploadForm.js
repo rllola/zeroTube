@@ -55,12 +55,17 @@ class UploadForm extends Component {
         this.setState({status: 'error', message: err})
       }
     })
+/*    let innerPathFile = 'data/users/' + this.props.site.auth_address + '/' + this.state.video.name
+    ZeroFrame.cmd('fileWrite', [innerPathFile, window.btoa(this.state.video)], (res) => {
+      console.log('File saved !')
+    }) */
     this.props.webtorrent.client.seed(this.state.video, this.onSeed)
   }
 
   onSeed (torrent) {
     let innerPath = 'data/users/' + this.props.site.auth_address + '/data.json'
     console.log('Client is seeding:', torrent.infoHash)
+    console.log('Torrent downloaded at :', torrent.path)
     /* Verify if video already uploaded by user */
     let query = 'SELECT video.*, user.value AS user_name, user_json_content.directory AS user_address ' +
     'FROM video ' +
@@ -71,6 +76,13 @@ class UploadForm extends Component {
     ZeroFrame.cmd('dbQuery', [query], (data) => {
       console.log(data)
       if (!data.length) {
+        /*torrent.files[0].getBlob((err, blob) => {
+          console.log(blob)
+          let innerPathFile = 'data/users/' + this.props.site.auth_address + '/' + this.state.video.name
+          ZeroFrame.cmd('fileWrite', [innerPathFile, window.btoa(blob)], (res) => {
+            console.log('File saved !')
+          })
+        })*/
         ZeroFrame.cmd('fileGet', {'inner_path': innerPath, 'required': false}, (data) => {
           if (data) {
             data = JSON.parse(data)
