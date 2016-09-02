@@ -3,10 +3,12 @@
 	"db_file": "data/zerotube.db",
 	"version": 2,
 	"maps": {
-		".+/data.json": {
-			"to_table": ["video"]
+		"users/.*/data.json": {
+			"to_table": [
+				"video"
+			]
 		},
-		".+/content.json": {
+		"users/.+/content.json": {
 			"to_keyvalue": [ "cert_user_id" ]
 		}
 	},
