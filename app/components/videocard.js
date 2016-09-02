@@ -27,12 +27,13 @@ class VideoCard extends Component {
           this.setState({peers: torrent.numPeers})
         })
         let file = torrent.files[0]
-        file.deselect() // Stop downloading the file but still give information on peers
-        /* torrent.on('done', () => {
+        // Stop downloading the file but still give information on peers
+        // file.deselect()
+        torrent.on('done', () => {
           console.log('Done !')
-          this.createPosterVideo('#' + torrent.infoHash + ' > video')
+          // this.createPosterVideo('#' + torrent.infoHash + ' > video')
         })
-        torrent.files[0].appendTo('#' + torrent.infoHash) */
+        // torrent.files[0].appendTo('#' + torrent.infoHash) 
       })
     } else {
       this.setState({peers: torrent.numPeers})
