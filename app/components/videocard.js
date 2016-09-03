@@ -5,6 +5,7 @@ import ZeroFrame from 'zeroframe'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as videosActions from '../videos/actions'
+import Storage from '../util/lsChunkStore'
 
 class VideoCard extends Component {
   constructor (props) {
@@ -19,9 +20,12 @@ class VideoCard extends Component {
   }
 
   componentDidMount () {
+    let opts = {
+      store: Storage
+    }
     let torrent = this.props.webtorrent.client.get(this.props.video.video_id)
     if (!torrent) {
-      this.props.webtorrent.client.add(this.props.video.magnet, (torrent) => {
+      this.props.webtorrent.client.add(this.props.video.magnet, opts, (torrent) => {
         this.setState({peers: torrent.numPeers})
         torrent.on('wire', () => {
           this.setState({peers: torrent.numPeers})

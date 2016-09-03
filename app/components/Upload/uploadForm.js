@@ -76,7 +76,7 @@ class UploadForm extends Component {
     ZeroFrame.cmd('dbQuery', [query], (data) => {
       console.log(data)
       if (!data.length) {
-        /*torrent.files[0].getBlob((err, blob) => {
+        /* torrent.files[0].getBlob((err, blob) => {
           console.log(blob)
           let innerPathFile = 'data/users/' + this.props.site.auth_address + '/' + this.state.video.name
           ZeroFrame.cmd('fileWrite', [innerPathFile, window.btoa(blob)], (res) => {
