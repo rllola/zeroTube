@@ -5,7 +5,7 @@ import ZeroFrame from 'zeroframe'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as videosActions from '../videos/actions'
-import Storage from '../util/lsChunkStore'
+import Storage from '../util/znChunkStore'
 
 class VideoCard extends Component {
   constructor (props) {
@@ -21,19 +21,20 @@ class VideoCard extends Component {
 
   componentDidMount () {
     let opts = {
+      path: '11SBfumiwgGhtLP6R6VvWumGAAVEbDgpU/data/users/' + this.props.site.auth_address + '/chunks',
       store: Storage
     }
     let torrent = this.props.webtorrent.client.get(this.props.video.video_id)
     if (!torrent) {
       this.props.webtorrent.client.add(this.props.video.magnet, opts, (torrent) => {
         this.setState({peers: torrent.numPeers})
+        console.log(torrent.numPeers)
         torrent.on('wire', () => {
           this.setState({peers: torrent.numPeers})
         })
         // let file = torrent.files[0]
         // Stop downloading the file but still give information on peers
         // file.deselect()
-        console.log(torrent.path)
         torrent.on('done', () => {
           console.log('Done !')
           // this.createPosterVideo('#' + torrent.infoHash + ' > video')
@@ -140,7 +141,8 @@ class VideoCard extends Component {
 
 function mapStateToProps (state) {
   return {
-    videos: state.videos
+    videos: state.videos,
+    site: state.site
   }
 }
 

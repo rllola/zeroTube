@@ -1,5 +1,3 @@
-import ZeroFrame from 'zeroframe'
-
 function Storage (chunkLength, opts) {
   if (!(this instanceof Storage)) return new Storage(chunkLength, opts)
   if (!opts) opts = {}
@@ -34,7 +32,6 @@ Storage.prototype.put = function (index, buf, cb) {
   while (!succeed && !this.overlap) {
     try {
       localStorage.setItem(this.prefix + '_' + index, toInsert)
-      // ZeroFrame.cmd('wrapperSetLocalStorage', )
       succeed = true
     } catch (e) {
       var clearedSpace = 0

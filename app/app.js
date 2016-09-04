@@ -16,6 +16,8 @@ const store = createStore(rootReducer, applyMiddleware(thunk))
 
 //  Update store with data site info.
 ZeroFrame.cmd('siteInfo', {}, (info) => {
+  // This need to be here because we need information on user fast (not optimal)
+  store.dispatch(updateInfo(info))
   //  Get total number of Video
   ZeroFrame.cmd('dbQuery', ['SELECT COUNT(*) AS total FROM video'], (totalVideo) => {
     Object.assign(info, {'total_video': totalVideo[0].total})
@@ -23,7 +25,7 @@ ZeroFrame.cmd('siteInfo', {}, (info) => {
   })
 })
 
-//  Now we can attach the router to the 'root' element like this:
+// Render only once we have those information
 render(
   <Provider store={store}>
     {Router(store)}
