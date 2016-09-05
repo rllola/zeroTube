@@ -1,6 +1,7 @@
 /* global XMLHttpRequest */
 
 import ZeroFrame from 'zeroframe'
+import arrayBufferToBuffer from 'arraybuffer-to-buffer'
 
 class Storage {
   constructor (chunkLength, opts = {}) {
@@ -14,9 +15,13 @@ class Storage {
     this.closed = false
     this.length = Number(opts.length) || Infinity
 
+    this.notOnZN = false
+
+    this.printOnce = false
+
     this.torrent = opts.torrent
     var pathArr = opts.files[0].path.split('/')
-    pathArr.splice(5, 1)
+    pathArr.splice(4, 1)
     var path = pathArr.join('/')
     this.path = '/' + path + '/' + this.torrent.infoHash + '/'
 
@@ -27,7 +32,6 @@ class Storage {
   }
 
   put (index, buf, cb) {
-    console.log('Put')
     if (this.closed) return nextTick(cb, new Error('Storage is closed'))
 
     var isLastChunk = (index === this.lastChunkIndex)
@@ -38,10 +42,8 @@ class Storage {
       return nextTick(cb, new Error('Chunk length must be ' + this.chunkLength))
     }
     this.chunks[index] = buf
-    console.log(buf)
     /* INSERT ZEROFRAME LOGIC HERE */
     ZeroFrame.cmd('fileWrite', [this.path + index + '.dat', buf.toString('base64')], (res) => {
-      console.log(res)
       nextTick(cb, null)
     })
   }
@@ -49,25 +51,39 @@ class Storage {
   get (index, opts, cb) {
     if (typeof opts === 'function') return this.get(index, null, opts)
     if (this.closed) return nextTick(cb, new Error('Storage is closed'))
-    console.log('get index:', index)
     var buf = this.chunks[index]
     if (!buf) {
-      requestBinary(this.path + index + '.dat' + '?_r=' + Math.random(), 'arraybuffer',
-          (xmlHttp) => {
-            console.log(xmlHttp.response)
-            if (!xmlHttp.response) return nextTick(cb, new Error('Chunk not found'))
-            try {
-              buf = new Buffer(xmlHttp.response)
-            } catch (e) {
-              return nextTick(cb, new Error('Could not create Buffer'))
-            }
-            this.chunks[index] = buf
-            if (!opts) return nextTick(cb, null, buf)
-            var offset = opts.offset || 0
-            var len = opts.length || (buf.length - offset)
-            nextTick(cb, null, buf.slice(offset, len + offset))
-          },
-          (xmlHttp, reason) => { return nextTick(cb, new Error('Chunk not found')) })
+      if (!this.notOnZN) {
+        requestBinary('/11SBfumiwgGhtLP6R6VvWumGAAVEbDgpU' + this.path + index + '.dat' + '?_r=' + Math.random(), 'arraybuffer',
+            (xmlHttp) => {
+              if (!xmlHttp.response) return nextTick(cb, new Error('Chunk not found'))
+              try {
+                buf = arrayBufferToBuffer(xmlHttp.response)
+              } catch (e) {
+                return nextTick(cb, new Error('Could not create Buffer'))
+              }
+              this.chunks[index] = buf
+              if (!opts) return nextTick(cb, null, buf)
+              var offset = opts.offset || 0
+              var len = opts.length || (buf.length - offset)
+              nextTick(cb, null, buf.slice(offset, len + offset))
+            },
+            (xmlHttp, reason) => {
+              this.notOnZN = true
+              return nextTick(cb, new Error('Chunk not found'))
+            })
+      } else {
+        return nextTick(cb, new Error('Chunk not found'))
+      }
+    } else {
+      if (buf && !this.printOnce) {
+        console.log(buf)
+        this.printOnce = true
+      }
+      if (!opts) return nextTick(cb, null, buf)
+      var offset = opts.offset || 0
+      var len = opts.length || (buf.length - offset)
+      nextTick(cb, null, buf.slice(offset, len + offset))
     }
   }
 
@@ -88,9 +104,6 @@ class Storage {
 }
 
 function nextTick (cb, err, val) {
-  if (err) {
-    console.error('Something went wrong :', err)
-  }
   process.nextTick(function () {
     if (cb) cb(err, val)
   })

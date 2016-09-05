@@ -7,6 +7,7 @@
   "author": "Lola <lola@zeroid.bit>",
   "license": "WTFPL",
   "dependencies": {
+    "arraybuffer-to-buffer": "0.0.4",
     "bootstrap": "^4.0.0-alpha.2",
     "moment": "^2.14.1",
     "react": "0.14.7",

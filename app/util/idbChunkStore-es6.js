@@ -1,10 +1,5 @@
 class Storage {
   constructor (chunkLength, opts = {}) {
-
-    //if (!window.indexedDB) throw new Error('indexedDB not supported')
-
-    this.open = window.indexedDB.open('ZeroTube', 1)
-
     this.chunkLength = Number(chunkLength)
     if (!this.chunkLength) throw new Error('First argument must be a chunk length')
 
@@ -17,8 +12,9 @@ class Storage {
       this.lastChunkIndex = Math.ceil(this.length / this.chunkLength) - 1
     }
 
-    this.close = this.destroy
+    this.printOnce = false
 
+    this.close = this.destroy
   }
 
   put (index, buf, cb) {
@@ -39,6 +35,10 @@ class Storage {
     if (typeof opts === 'function') return this.get(index, null, opts)
     if (this.closed) return nextTick(cb, new Error('Storage is closed'))
     var buf = this.chunks[index]
+    if (buf && !this.printOnce) {
+      console.log(buf)
+      this.printOnce = true
+    }
     if (!buf) return nextTick(cb, new Error('Chunk not found'))
     if (!opts) return nextTick(cb, null, buf)
     var offset = opts.offset || 0

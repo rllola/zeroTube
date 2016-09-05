@@ -21,7 +21,7 @@ class VideoCard extends Component {
 
   componentDidMount () {
     let opts = {
-      path: '11SBfumiwgGhtLP6R6VvWumGAAVEbDgpU/data/users/' + this.props.site.auth_address + '/chunks',
+      path: 'data/users/' + this.props.site.auth_address + '/chunks',
       store: Storage
     }
     let torrent = this.props.webtorrent.client.get(this.props.video.video_id)
@@ -131,7 +131,7 @@ class VideoCard extends Component {
           <br />
           <p style={wrapWord} className="card-text text-subtle">{this.props.video.description}</p>
           {this.props.mine ? <button onClick={this.handleDelete} type="button" className="btn btn-outline-danger" >Delete</button> : null}
-          <Link to={'/watch/' + this.props.video.json_id + '/' + this.props.video.video_id} type="button" className={'btn btn-outline-primary pull-right ' + (this.state.peers === 0 ? 'disabled' : null)}>Watch it ({this.state.peers} peers)</Link>
+          <Link to={'/watch/' + this.props.video.json_id + '/' + this.props.video.video_id} type="button" className={'btn btn-outline-primary pull-right ' + (this.state.peers === 0 ? null : null)}>Watch it ({this.state.peers} peers)</Link>
         </div>
         <div style={none} id={this.props.video.video_id}></div>
       </div>
