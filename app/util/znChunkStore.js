@@ -91,8 +91,7 @@ class Storage {
                 console.log('Fail')
                 return nextTick(cb, new Error('Could not create Buffer'))
               }
-              /* Save memory don't use it */
-              // this.chunks[index] = buf
+              this.chunks[index] = buf
               if (!opts) return nextTick(cb, null, buf)
               var offset = opts.offset || 0
               var len = opts.length || (buf.length - offset)
