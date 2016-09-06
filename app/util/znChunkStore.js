@@ -1,7 +1,6 @@
 /* global XMLHttpRequest */
 
 import ZeroFrame from 'zeroframe'
-// import arrayBufferToBuffer from 'arraybuffer-to-buffer'
 
 class Storage {
   constructor (chunkLength, opts = {}) {
@@ -15,9 +14,16 @@ class Storage {
     this.closed = false
     this.length = Number(opts.length) || Infinity
 
+    console.log(this.chunkLength)
+
     this.notOnZN = false
 
-    this.printOnce = false
+    this.test = null
+
+    this.printOnce = {
+      put: false,
+      get: false
+    }
 
     this.torrent = opts.torrent
     var pathArr = opts.files[0].path.split('/')
@@ -36,6 +42,9 @@ class Storage {
     if (this.closed) return nextTick(cb, new Error('Storage is closed'))
 
     var isLastChunk = (index === this.lastChunkIndex)
+    if (isLastChunk) {
+      this.notOnZN = false
+    }
     if (isLastChunk && buf.length !== this.lastChunkLength) {
       return nextTick(cb, new Error('Last chunk length must be ' + this.lastChunkLength))
     }
@@ -45,30 +54,42 @@ class Storage {
     /* Save memory don't use it */
     // this.chunks[index] = buf
     /* INSERT ZEROFRAME LOGIC HERE */
+    if (!this.printOnce.put & index === 1) {
+      console.log('index:', index)
+      console.log(buf)
+      this.test = buf
+      this.printOnce.put = true
+    }
     ZeroFrame.cmd('fileWrite', [this.path + index + '.dat', buf.toString('base64')], (res) => {
+      // console.log(res)
       nextTick(cb, null)
     })
   }
 
   get (index, opts, cb) {
+    console.log('get')
     if (typeof opts === 'function') return this.get(index, null, opts)
     if (this.closed) return nextTick(cb, new Error('Storage is closed'))
     var buf = this.chunks[index]
     if (!buf) {
       if (!this.notOnZN) {
-        console.log('Getting chunks number :', index)
-        requestBinary('/11SBfumiwgGhtLP6R6VvWumGAAVEbDgpU' + this.path + index + '.dat' + '?_r=' + Math.random(), 'arrayBuffer',
+        // YES IT MUST BE DOUBLE QUOTES OR THIS NOT WORK ! I LOST A FULL DAY BECAUSE OF THIS
+        requestBinary('/11SBfumiwgGhtLP6R6VvWumGAAVEbDgpU' + this.path + index + '.dat' + '?_r=' + Math.random(), "arraybuffer",
             (xmlHttp) => {
               if (!xmlHttp.response) return nextTick(cb, new Error('Chunk not found'))
               try {
-                buf = xmlHttp.response
+                buf = new Uint8Array(xmlHttp.response)
+                // var result = new Uint8Array(buf)
+                if (!this.printOnce.get & index === 1) {
+                  console.log('index:', index)
+                  console.log(xmlHttp)
+                  console.log(buf)
+                  console.log(this.test === buf)
+                  this.printOnce.get = true
+                }
               } catch (e) {
+                console.log('Fail')
                 return nextTick(cb, new Error('Could not create Buffer'))
-              }
-              if (buf && !this.printOnce) {
-                console.log(xmlHttp.response)
-                console.log(buf)
-                this.printOnce = true
               }
               /* Save memory don't use it */
               // this.chunks[index] = buf
@@ -85,9 +106,9 @@ class Storage {
         return nextTick(cb, new Error('Chunk not found'))
       }
     } else {
-      if (buf && !this.printOnce) {
-        console.log(buf)
-        this.printOnce = true
+      if (buf && !this.printOnce.get) {
+        console.log(buf.length)
+        this.printOnce.get = true
       }
       if (!opts) return nextTick(cb, null, buf)
       var offset = opts.offset || 0
@@ -120,6 +141,7 @@ function nextTick (cb, err, val) {
 
 function requestBinary (url, responseType, callback, failure) {
   requestAsync(url, null, responseType, callback, failure)
+  // requestAsync(url, responseType, null, callback, failure)
 }
 
 function requestAsync (url, minetype, responseType, callback, failure) {
@@ -146,6 +168,8 @@ function requestAsync (url, minetype, responseType, callback, failure) {
   if (responseType != null) {
     xmlHttp.responseType = responseType
   }
+
+  // xmlHttp.responseType = "arraybuffer"
 
   try {
     xmlHttp.send(null)

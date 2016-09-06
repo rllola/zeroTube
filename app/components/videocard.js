@@ -22,11 +22,11 @@ class VideoCard extends Component {
   componentDidMount () {
     let opts = {
       path: 'data/users/' + this.props.site.auth_address + '/chunks',
-      store: Storage
+      //store: Storage
     }
     let torrent = this.props.webtorrent.client.get(this.props.video.video_id)
     if (!torrent) {
-      this.props.webtorrent.client.add(this.props.video.magnet, opts, (torrent) => {
+       this.props.webtorrent.client.add(this.props.video.magnet, opts, (torrent) => {
         this.setState({peers: torrent.numPeers})
         console.log(torrent.numPeers)
         torrent.on('wire', () => {
