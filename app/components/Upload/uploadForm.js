@@ -48,7 +48,7 @@ class UploadForm extends Component {
           if (!err) {
             this.startSeeding()
           } else {
-            this.setStet({status: 'error', message: err})
+            this.setState({status: 'error', message: err})
           }
         })
       } else {
