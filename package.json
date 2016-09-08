@@ -1,6 +1,6 @@
 {
   "name": "zerotube",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "scripts": {
     "start": "gulp"
   },
@@ -13,6 +13,7 @@
     "react-dom": "0.14.7",
     "react-redux": "^4.4.5",
     "react-router": "2.0.0",
+    "react-truncate": "^1.1.3",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "webtorrent": "^0.96.0",

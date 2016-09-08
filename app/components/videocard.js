@@ -5,6 +5,7 @@ import ZeroFrame from 'zeroframe'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as videosActions from '../videos/actions'
+import Truncate from 'react-truncate'
 
 class VideoCard extends Component {
   constructor (props) {
@@ -111,20 +112,33 @@ class VideoCard extends Component {
     let none = {
       display: 'none'
     }
-    let wrapWord = {
-      wordWrap: 'break-word'
+    let header = {
+      wordWrap: 'break-word',
+      height: '66px'
+    }
+    let description = {
+      wordWrap: 'break-word',
+      height: '120px'
     }
     return (
       <div style={style} className="card">
         <img className="card-img-top img-fluid" src={this.state.poster} alt="Card image cap" />
         <div className="card-block">
-          <h5 className="card-title">{this.props.video.title}</h5>
+          <h5 style={header} className="card-title">
+            <Truncate lines={3} ellipsis={<span>&hellip;</span>}>
+              {this.props.video.title}
+            </Truncate>
+          </h5>
           <small className="text-muted">
             Added {moment(this.props.video.date_added).fromNow()} by <Link to={'/profile/' + this.props.video.user_name}>{this.props.video.user_name}</Link>
           </small>
           <br />
           <br />
-          <p style={wrapWord} className="card-text text-subtle">{this.props.video.description}</p>
+          <p style={description} className="card-text text-subtle">
+            <Truncate lines={5} ellipsis={<span>&hellip;</span>}>
+              {this.props.video.description}
+            </Truncate>
+          </p>
           {this.props.mine ? <button onClick={this.handleDelete} type="button" className="btn btn-outline-danger" >Delete</button> : null}
           <Link to={'/watch/' + this.props.video.json_id + '/' + this.props.video.video_id} type="button" className={'btn btn-outline-primary pull-right ' + (this.state.peers === 0 ? 'disabled' : null)}>Watch it ({this.state.peers} peers)</Link>
         </div>
