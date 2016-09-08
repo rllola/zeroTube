@@ -9,6 +9,10 @@ class Watch extends Component {
     super(props)
 
     this.state = {
+      peers: 0,
+      downloaded: 0,
+      speed: 0,
+      progress: 0,
       video: {}
     }
   }
@@ -36,6 +40,10 @@ class Watch extends Component {
         torrent.on('download', (bytes) => {
           this.setState({downloaded: torrent.downloaded, speed: torrent.downloadSpeed, progress: torrent.progress})
         })
+        this.setState({peers: torrent.numPeers})
+        torrent.on('wire', () => {
+          this.setState({peers: torrent.numPeers})
+        })
         torrent.critical()
         torrent.files[0].appendTo('#video')
       }
@@ -52,7 +60,7 @@ class Watch extends Component {
         </small>
         <div className="alert alert-info" role="alert">
           <a className="nav-link" target="_blank" href={this.state.video.magnet}>Magnet URI</a> <br />
-          <strong>Progress</strong>: {this.state.progress} <strong>Downloaded</strong>: {this.state.downloaded} <strong>Speed</strong>: {this.state.speed}
+          <strong>Peers</strong>: {this.state.peers} <strong>Progress</strong>: {this.state.progress} <strong>Downloaded</strong>: {this.state.downloaded} <strong>Speed</strong>: {this.state.speed}
         </div>
         <p>{this.state.video.description}</p>
       </div>
