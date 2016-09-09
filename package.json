@@ -8,10 +8,12 @@
   "license": "WTFPL",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",
+    "es6-promise": "^3.2.1",
     "moment": "^2.14.1",
     "react": "0.14.7",
     "react-dom": "0.14.7",
     "react-redux": "^4.4.5",
+    "react-resolver": "^3.0.3",
     "react-router": "2.0.0",
     "react-truncate": "^1.1.3",
     "redux": "^3.5.2",
@@ -23,6 +25,7 @@
     "babel-cli": "^6.5.1",
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.4",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-2": "^6.5.0",
@@ -35,5 +38,11 @@
     "redux-devtools": "^3.3.1",
     "webpack": "^1.12.14",
     "webpack-stream": "^3.1.0"
+  },
+  "standard": {
+    "ignore": [
+      "webpack.config.js"
+    ],
+    "parser": "babel-eslint"
   }
 }

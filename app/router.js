@@ -13,6 +13,7 @@ import Upload from './components/Upload/upload'
 import Watch from './components/Watch/watch'
 import Search from './components/Search/result'
 import Profile from './components/Profile/profile'
+import Edit from './components/Edit/edit'
 
 function getLatestVideos (store) {
   store.dispatch(latestVideos())
@@ -28,6 +29,7 @@ export default (store) => {
         <Route path="/watch/:json/:torrentID" component={Watch} />
         <Route path="/search" component={Search} />
         <Route path="/profile/:zeroID" component={Profile} />
+        <Route path="/edit/:json/:torrentID" component={Edit} />
         <Route from="*" to="{`/${Constants.APP_ID}`}" />
       </Route>
     </Router>

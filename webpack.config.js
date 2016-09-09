@@ -5,7 +5,7 @@ module.exports = {
   node: {
     fs: 'empty'
   },
-  entry: ['bootstrap/dist/js/bootstrap.min.js','./app/app.js'],
+  entry: ['bootstrap/dist/js/bootstrap.min.js', './app/app.js'],
   output: {
     filename: 'public/js/all.js',
     sourceMapFilename: 'public/js/all.map'
