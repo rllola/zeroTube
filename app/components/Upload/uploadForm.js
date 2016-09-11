@@ -59,7 +59,14 @@ class UploadForm extends Component {
     ZeroFrame.cmd('fileWrite', [innerPathFile, window.btoa(this.state.video)], (res) => {
       console.log('File saved !')
     }) */
-    this.props.webtorrent.client.seed(this.state.video, this.onSeed)
+    let opts = {
+      announce: [
+        'ws://198.211.121.40:8100/',
+        'wss://tracker.webtorrent.io',
+        'wss://tracker.openwebtorrent.com'
+      ]
+    }
+    this.props.webtorrent.client.seed(this.state.video, opts, this.onSeed)
   }
 
   onSeed (torrent) {
@@ -76,7 +83,7 @@ class UploadForm extends Component {
     ZeroFrame.cmd('dbQuery', [query], (data) => {
       console.log(data)
       if (!data.length) {
-        /*torrent.files[0].getBlob((err, blob) => {
+        /* torrent.files[0].getBlob((err, blob) => {
           console.log(blob)
           let innerPathFile = 'data/users/' + this.props.site.auth_address + '/' + this.state.video.name
           ZeroFrame.cmd('fileWrite', [innerPathFile, window.btoa(blob)], (res) => {

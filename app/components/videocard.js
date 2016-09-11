@@ -18,8 +18,15 @@ class VideoCard extends Component {
 
   componentDidMount () {
     let torrent = this.props.webtorrent.client.get(this.props.video.video_id)
+    let opts = {
+      announce: [
+        'ws://198.211.121.40:8100/',
+        'wss://tracker.webtorrent.io',
+        'wss://tracker.openwebtorrent.com'
+      ]
+    }
     if (!torrent) {
-      this.props.webtorrent.client.add(this.props.video.magnet, (torrent) => {
+      this.props.webtorrent.client.add(this.props.video.magnet, opts, (torrent) => {
         this.setState({peers: torrent.numPeers})
         torrent.on('wire', () => {
           this.setState({peers: torrent.numPeers})
