@@ -1,8 +1,13 @@
 import { UPDATE_INFO } from './constants'
 import Webtorrent from 'webtorrent/webtorrent.min'
+import rtcConfig from '../../rtcConfig.json'
 
 const initialState = {
-  client: new Webtorrent()
+  client: new Webtorrent({
+    tracker: {
+      rtcConfig: rtcConfig
+    }
+  })
 }
 
 export default function webtorrent (state = initialState, action) {

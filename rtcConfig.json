@@ -1,0 +1,26 @@
+{
+  "iceServers": [
+    {
+      "url": "stun:23.21.150.121",
+      "urls": "stun:23.21.150.121"
+    },
+    {
+      "url": "turn:global.turn.twilio.com:3478?transport=udp",
+      "username": "f45ae923bea0b81c4c680c7961ca2ef3ecd012c9865b29edf1733a9b17bf1701",
+      "credential": "C+M4zrubA24SPH74R/ve4mVeR1wYBnBwQFO5HawqK54=",
+      "urls": "turn:global.turn.twilio.com:3478?transport=udp"
+    },
+    {
+      "url": "turn:global.turn.twilio.com:3478?transport=tcp",
+      "username": "f45ae923bea0b81c4c680c7961ca2ef3ecd012c9865b29edf1733a9b17bf1701",
+      "credential": "C+M4zrubA24SPH74R/ve4mVeR1wYBnBwQFO5HawqK54=",
+      "urls": "turn:global.turn.twilio.com:3478?transport=tcp"
+    },
+    {
+      "url": "turn:global.turn.twilio.com:443?transport=tcp",
+      "username": "f45ae923bea0b81c4c680c7961ca2ef3ecd012c9865b29edf1733a9b17bf1701",
+      "credential": "C+M4zrubA24SPH74R/ve4mVeR1wYBnBwQFO5HawqK54=",
+      "urls": "turn:global.turn.twilio.com:443?transport=tcp"
+    }
+  ]
+}
