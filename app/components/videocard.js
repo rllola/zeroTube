@@ -5,13 +5,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as videosActions from '../videos/actions'
 import Truncate from 'react-truncate'
+import Constants from '../util/constants'
 
 class VideoCard extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      poster: '/11SBfumiwgGhtLP6R6VvWumGAAVEbDgpU/public/img/no-preview.jpg',
+      poster: '/' + Constants.APP_ID + '/public/img/no-preview.jpg',
       peers: 0
     }
   }

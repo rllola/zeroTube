@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import * as videosActions from '../../videos/actions'
 import VideoCard from '../videocard'
 import LoadMore from '../loadMore'
+import Constants from '../../util/constants'
 
 class Home extends Component {
   componentWillMount () {
@@ -17,7 +18,7 @@ class Home extends Component {
 
     return (
       <div>
-        <img style={style} src="/11SBfumiwgGhtLP6R6VvWumGAAVEbDgpU/public/img/zero_degrade.png" className="img-fluid m-x-auto d-block" ></img>
+        <img style={style} src={'/'+ Constants.APP_ID +'/public/img/zero_degrade.png'} className="img-fluid m-x-auto d-block" ></img>
         <br />
         <div className="card-columns">
           {this.props.videos.map((video, i) => {
