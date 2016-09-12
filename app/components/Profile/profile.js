@@ -29,8 +29,6 @@ class Profile extends Component {
   constructor (props) {
     super(props)
 
-    console.log(props.params)
-
     this.state = {
       mine: (this.props.params.zeroID === this.props.site.cert_user_id)
     }

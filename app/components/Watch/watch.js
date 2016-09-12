@@ -8,6 +8,8 @@ class Watch extends Component {
   constructor (props) {
     super(props)
 
+    this.onTorrent = this.onTorrent.bind(this)
+
     this.state = {
       peers: 0,
       downloaded: 0,
@@ -29,25 +31,33 @@ class Watch extends Component {
       this.setState({video: data[0]})
       let torrent = this.props.webtorrent.client.get(data[0].video_id)
       if (!torrent) {
-        this.props.webtorrent.client.add(data[0].magnet, (torrent) => {
-          torrent.on('done', () => {
-            console.log('Done !')
-          })
-          torrent.files[0].appendTo('#video')
-        })
+        var opts = {
+          announce: [
+            'ws://198.211.121.40:8100/',
+            'wss://tracker.webtorrent.io',
+            'wss://tracker.openwebtorrent.com'
+          ]
+        }
+        this.props.webtorrent.client.add(data[0].magnet, opts, this.onTorrent)
       } else {
         console.log('torrent already addded')
-        torrent.on('download', (bytes) => {
-          this.setState({downloaded: torrent.downloaded, speed: torrent.downloadSpeed, progress: torrent.progress})
-        })
-        this.setState({peers: torrent.numPeers})
-        torrent.on('wire', () => {
-          this.setState({peers: torrent.numPeers})
-        })
-        torrent.critical()
-        torrent.files[0].appendTo('#video')
+        this.onTorrent(torrent)
       }
     })
+  }
+
+  onTorrent (torrent) {
+    this.setState({peers: torrent.numPeers})
+    torrent.on('done', () => {
+      console.log('Done !')
+    })
+    torrent.on('wire', () => {
+      this.setState({peers: torrent.numPeers})
+    })
+    torrent.on('download', (bytes) => {
+      this.setState({downloaded: torrent.downloaded, speed: torrent.downloadSpeed, progress: torrent.progress})
+    })
+    torrent.files[0].appendTo('#video')
   }
 
   render () {

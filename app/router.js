@@ -20,9 +20,25 @@ function getLatestVideos (store) {
 }
 
 export default (store) => {
+  const redirect = function redirect (nextState, replace, callback) {
+    var start = nextState.location.search.indexOf('wrapper_nonce')
+    var path = nextState.location.search.substring(0, start)
+
+    if (path.indexOf('&')) {
+      var index = path.indexOf('&')
+      path = path.substring(0, index)
+    }
+
+    if (nextState.location.search) {
+      replace(path.slice(2))
+    }
+
+    callback()
+  }
+
   return (
     <Router history={browserHistory}>
-      <Route path={`/${Constants.APP_ID}`} component={MainLayout}>
+      <Route path={`/${Constants.APP_ID}`} component={MainLayout} onEnter={redirect} >
         <IndexRoute component={Home} onEnter={getLatestVideos(store)} />
         <Route path="/upload" component={Upload} />
         <Route path="/how" component={How} />

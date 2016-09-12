@@ -11,7 +11,7 @@ class VideoCard extends Component {
     super(props)
 
     this.state = {
-      poster: 'public/img/no-preview.jpg',
+      poster: '/11SBfumiwgGhtLP6R6VvWumGAAVEbDgpU/public/img/no-preview.jpg',
       peers: 0
     }
   }

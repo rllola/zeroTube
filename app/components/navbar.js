@@ -32,7 +32,7 @@ class Navbar extends Component {
     }
     return (
       <nav className="navbar navbar-light bg-faded">
-        <Link to={`${Constants.APP_ID}`} className="navbar-brand col-xs-1" ><img src="public/img/zerotube-logo.svg" height="35" /></Link>
+        <Link to={`${Constants.APP_ID}`} className="navbar-brand col-xs-1" ><img src="/11SBfumiwgGhtLP6R6VvWumGAAVEbDgpU/public/img/zerotube-logo.svg" height="35" /></Link>
         <div>
           <form className="form-inline" name="searchForm" onSubmit={this.handleSubmit} >
             <input className="form-control" value={this.state.query} onChange={this.handleQueryChange} type="text" name="query" placeholder="Search" />
