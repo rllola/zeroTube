@@ -100,6 +100,7 @@ class VideoCard extends Component {
       height: '120px'
     }
     return (
+      <div className="col-xs-4">
       <div style={style} className="card">
         <img className="card-img-top img-fluid" src={this.state.poster} alt="Card image cap" />
         <div className="card-block">
@@ -122,6 +123,7 @@ class VideoCard extends Component {
           <Link to={'/watch/' + this.props.video.json_id + '/' + this.props.video.video_id} role="button" className={'btn btn-outline-primary pull-right ' + (this.state.peers === 0 ? 'disabled' : null)}>Watch it ({this.state.peers} peers)</Link>
         </div>
       </div>
+    </div>
     )
   }
 };
