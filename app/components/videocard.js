@@ -35,7 +35,6 @@ class VideoCard extends Component {
         // let file = torrent.files[0]
         // Stop downloading the file but still give information on peers
         // file.deselect()
-        console.log(torrent.path)
         torrent.on('done', () => {
           console.log('Done !')
           // this.createPosterVideo('#' + torrent.infoHash + ' > video')
