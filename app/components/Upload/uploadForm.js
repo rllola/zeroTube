@@ -71,8 +71,6 @@ class UploadForm extends Component {
 
   onSeed (torrent) {
     let innerPath = 'data/users/' + this.props.site.auth_address + '/data.json'
-    console.log('Client is seeding:', torrent.infoHash)
-    console.log('Torrent downloaded at :', torrent.path)
     /* Verify if video already uploaded by user */
     let query = 'SELECT video.*, user.value AS user_name, user_json_content.directory AS user_address ' +
     'FROM video ' +
@@ -81,7 +79,6 @@ class UploadForm extends Component {
     'LEFT JOIN keyvalue AS user ON (user.json_id = user_json_content.json_id AND user.key = "cert_user_id") ' +
     'WHERE user_name = "' + this.props.site.cert_user_id + '" AND video.video_id = "' + torrent.infoHash + '"'
     ZeroFrame.cmd('dbQuery', [query], (data) => {
-      console.log(data)
       if (!data.length) {
         /* torrent.files[0].getBlob((err, blob) => {
           console.log(blob)
