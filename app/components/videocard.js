@@ -87,10 +87,12 @@ class VideoCard extends Component {
   }
 
   render () {
+    let hide = {
+      display: 'none'
+    }
     let style = {
       maxWidth: '20rem'
     }
-
     let header = {
       wordWrap: 'break-word',
       height: '66px'
@@ -100,30 +102,30 @@ class VideoCard extends Component {
       height: '120px'
     }
     return (
-      <div className="col-xs-4">
-      <div style={style} className="card">
-        <img className="card-img-top img-fluid" src={this.state.poster} alt="Card image cap" />
-        <div className="card-block">
-          <h5 style={header} className="card-title">
-            <Truncate lines={3} ellipsis={<span>...</span>} >
-              {this.props.video.title}
-            </Truncate>
-          </h5>
-          <small className="text-muted">
-            Added {moment(this.props.video.date_added).fromNow()} by <Link to={'/profile/' + this.props.video.user_name}>{this.props.video.user_name}</Link>
-          </small>
-          <br />
-          <br />
-          <p style={description} className="card-text text-subtle">
-            <Truncate lines={5} ellipsis={<span>...</span>} >
-              {this.props.video.description}
-            </Truncate>
-          </p>
-          {this.props.mine ? <Link to={'/edit/' + this.props.video.json_id + '/' + this.props.video.video_id} role="button" className="btn btn-outline-success" >Edit</Link> : null}
-          <Link to={'/watch/' + this.props.video.json_id + '/' + this.props.video.video_id} role="button" className={'btn btn-outline-primary pull-right ' + (this.state.peers === 0 ? 'disabled' : null)}>Watch it ({this.state.peers} peers)</Link>
+      <div style={(this.state.peers === 0 && this.state.homepage) ? hide : null} className="col-xs-4">
+        <div style={style} className="card">
+          <img className="card-img-top img-fluid" src={this.state.poster} alt="Card image cap" />
+          <div className="card-block">
+            <h5 style={header} className="card-title">
+              <Truncate lines={3} ellipsis={<span>...</span>} >
+                {this.props.video.title}
+              </Truncate>
+            </h5>
+            <small className="text-muted">
+              Added {moment(this.props.video.date_added).fromNow()} by <Link to={'/profile/' + this.props.video.user_name}>{this.props.video.user_name}</Link>
+            </small>
+            <br />
+            <br />
+            <p style={description} className="card-text text-subtle">
+              <Truncate lines={5} ellipsis={<span>...</span>} >
+                {this.props.video.description}
+              </Truncate>
+            </p>
+            {this.props.mine ? <Link to={'/edit/' + this.props.video.json_id + '/' + this.props.video.video_id} role="button" className="btn btn-outline-success" >Edit</Link> : null}
+            <Link to={'/watch/' + this.props.video.json_id + '/' + this.props.video.video_id} role="button" className={'btn btn-outline-primary pull-right ' + (this.state.peers === 0 ? 'disabled' : null)}>Watch it ({this.state.peers} peers)</Link>
+          </div>
         </div>
       </div>
-    </div>
     )
   }
 };

@@ -40,7 +40,6 @@ class Watch extends Component {
         }
         this.props.webtorrent.client.add(data[0].magnet, opts, this.onTorrent)
       } else {
-        console.log('torrent already addded')
         this.onTorrent(torrent)
       }
     })

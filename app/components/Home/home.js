@@ -18,11 +18,11 @@ class Home extends Component {
 
     return (
       <div>
-        <img style={style} src={'/'+ Constants.APP_ID +'/public/img/zero_degrade.png'} className="img-fluid m-x-auto d-block" ></img>
+        <img style={style} src={'/' + Constants.APP_ID + '/public/img/zero_degrade.png'} className="img-fluid m-x-auto d-block" ></img>
         <br />
         <div className="row">
           {this.props.videos.map((video, i) => {
-            return <VideoCard video={video} webtorrent={this.props.webtorrent} />
+            return <VideoCard video={video} webtorrent={this.props.webtorrent} homepage={true} />
           })}
         </div>
         {(this.props.site.total_video > this.props.videos.length) ? <LoadMore length={this.props.videos.length} /> : null}
