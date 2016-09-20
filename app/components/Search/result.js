@@ -16,7 +16,7 @@ class Result extends Component {
     }
     return (
       <div>
-        <div style={style} className="card-columns">
+        <div style={style} className="row">
           {this.props.videos.map((video, i) => {
             return <VideoCard video={video} webtorrent={this.props.webtorrent} />
           })}
