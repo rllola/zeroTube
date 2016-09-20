@@ -30,12 +30,18 @@ class VideoCard extends Component {
       this.props.webtorrent.client.add(this.props.video.magnet, opts, (torrent) => {
         this.setState({peers: torrent.numPeers})
         torrent.on('wire', () => {
+          // Callback to remove message
+          if (this.props.callback) {
+            this.props.callback()
+          }
           this.setState({peers: torrent.numPeers})
+        })
+        torrent.on('noPeers', (announceType) => {
+          console.log(announceType)
         })
         // let file = torrent.files[0]
         // Stop downloading the file but still give information on peers
         // file.deselect()
-        console.log(torrent.path)
         torrent.on('done', () => {
           console.log('Done !')
           // this.createPosterVideo('#' + torrent.infoHash + ' > video')
@@ -44,7 +50,14 @@ class VideoCard extends Component {
       })
     } else {
       this.setState({peers: torrent.numPeers})
+      torrent.on('noPeers', (announceType) => {
+        console.log(announceType)
+      })
       torrent.on('wire', () => {
+        // Callback to remove message
+        if (this.props.callback) {
+          this.props.callback()
+        }
         this.setState({peers: torrent.numPeers})
       })
     }
@@ -101,8 +114,9 @@ class VideoCard extends Component {
       wordWrap: 'break-word',
       height: '120px'
     }
+
     return (
-      <div style={(this.state.peers === 0 && this.state.homepage) ? hide : null} className="col-xs-4">
+      <div style={(this.state.peers === 0 && this.props.homepage) ? hide : null} className="col-xs-4">
         <div style={style} className="card">
           <img className="card-img-top img-fluid" src={this.state.poster} alt="Card image cap" />
           <div className="card-block">
