@@ -34,10 +34,10 @@ class Home extends Component {
       <div>
         <img style={style} src={'/' + Constants.APP_ID + '/public/img/zero_degrade.png'} className="img-fluid m-x-auto d-block" ></img>
         <br />
-        {this.state.loading ? <div className="row"><h2>We are looking for peers...</h2></div> : null}
+        {this.state.loading ? <div className="row"><h2>We are looking for peers... <img src={'/' + Constants.APP_ID + '/public/img/parrot.gif'} /></h2></div> : null}
         <div className="row">
           {this.props.videos.map((video, i) => {
-            return <VideoCard video={video} webtorrent={this.props.webtorrent} homepage={true} callback={this.peersFound} />
+            return <VideoCard video={video} webtorrent={this.props.webtorrent} homepage callback={this.peersFound} />
           })}
         </div>
         {(this.props.site.total_video > this.props.videos.length) ? <LoadMore length={this.props.videos.length} /> : null}

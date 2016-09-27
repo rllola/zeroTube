@@ -49,7 +49,12 @@ class VideoCard extends Component {
         // torrent.files[0].appendTo('#' + torrent.infoHash)
       })
     } else {
-      this.setState({peers: torrent.numPeers})
+      if (torrent.numPeers > 0) {
+        this.setState({peers: torrent.numPeers})
+        if (this.props.callback) {
+          this.props.callback()
+        }
+      }
       torrent.on('noPeers', (announceType) => {
         console.log(announceType)
       })
